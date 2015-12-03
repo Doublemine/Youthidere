@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#673ab7</color>
+    <color name="colorPrimaryDark">#5e35b1</color>
+    <color name="colorAccent">#9575cd</color>
+    <color name="windowBackground">#eeeeee</color>
+    <color name="cardViewBackground">#f5f5f5</color>
+    <color name="exploreUserNameFontColor">#000000</color>
+
+
+    <!--以下为注册登录activity配色-->
+    <color name="primary">#673ab7</color>
+    <color name="primary_dark">#5e35b1</color>
+    <color name="primary_darker">#ab47bc</color>
+    <color name="accent">#FFFFFF</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="white">#FFFFFF</color>
+    <color name="list_item_press">#216b74ff</color>
+    <color name="gray_de">#666666</color>
+</resources>

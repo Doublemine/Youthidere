@@ -3,4 +3,44 @@
     <string name="navigation_drawer_open">打开导航抽屉</string>
     <string name="navigation_drawer_close">关闭导航抽屉</string>
     <string name="action_settings">设置</string>
+
+    <!--以下为抽屉字符串-->
+    <string name="drawer_nav_item_category">分类</string>
+    <string name="drawer_nav_item_submit_for_publication">投稿</string>
+    <string name="drawer_nav_item_account">账号</string>
+    <string name="drawer_nav_item_settings">设置</string>
+    <string name="drawer_nav_item_about">关于</string>
+    <string name="drawer_nav_item_open_source_library">使用到的开源库</string>
+    <string name="drawer_nav_item_help">使用帮助</string>
+    <string name="drawer_nav_item_acknowledgements">其它</string>
+    <string name="drawer_nav_item_home">主页</string>
+    <string name="title_activity_login">登录</string>
+    <string name="title_activity_signup">注册</string>
+
+    <!--以下为登录注册的activity的字符串-->
+    <string name="actvity_login_string_authenticate">正在登录....</string>
+    <string name="actvity_login_string_login_failed">登录失败！</string>
+    <string name="actvity_login_string_email_adress_input_error">请输入一个有效的邮箱地址！</string>
+    <string name="actvity_login_string_password_input_error">密码长度应该为4位以上10位以下的字符！</string>
+    <string name="actvity_signup_string_username_input_error">用户名长度太短！</string>
+    <string name="actvity_signup_string_email_address_input_error">请输入一个有效的邮箱地址！</string>
+    <string name="actvity_signup_string_password_input_error">密码长度应该为4位以上10位以下的字符！</string>
+    <string name="actvity_signup_string_signuping_msg">正在注册....</string>
+    <string name="actvity_signup_string_signup_fail_msg">注册失败!</string>
+    <string name="actvity_login_xml_link_signup">没有账户? 创建一个</string>
+    <string name="actvity_login_xml_btn_login">登录</string>
+    <string name="actvity_login_xml_et_passwd">密码</string>
+    <string name="actvity_login_xml_et_email">邮箱</string>
+    <string name="actvity_signup_xml_link_login">已有账号? 登录</string>
+    <string name="actvity_signup_xml_btn_signup">注册</string>
+    <string name="actvity_signup_xml_et_email">邮箱</string>
+    <string name="actvity_signup_xml_et_username">昵称</string>
+    <string name="actvity_signup_xml_et_passwd">密码</string>
+    <string name="activity_setting_action_bar_text">设置</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="activity_account_info_logout">注销</string>
+    <string name="nav_header_default_email_text">请登录账号享受更加完成的功能~</string>
+    <string name="nav_header_default_username_text">匿名用户</string>
+    <string name="pref_clearCache_summary">清空程序占用的存储空间</string>
+
 </resources>

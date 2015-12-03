@@ -1,0 +1,102 @@
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="@color/cardViewBackground"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="5dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="5dp"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/card_view_explore_user_image"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/xiamo"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/card_view_explore_username"
+                    android:text="时过夏末"
+                    android:textSize="16sp"
+                    android:textColor="@color/exploreUserNameFontColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="#BDBDBD"
+                    android:shadowRadius="1"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    />
+                <TextView
+                    android:id="@+id/card_view_explore_create_time"
+                    android:layout_alignParentBottom="true"
+                    android:paddingBottom="2dp"
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:text="2015-5-7"
+                    android:drawableLeft="@drawable/ic_create_date_18dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/card_view_explore_user_location"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@id/card_view_explore_create_time"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="12sp"
+                    android:paddingBottom="2dp"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/ic_location_18dp"
+                    android:text="中国 广东 深圳"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/card_view_explore_user_text"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:text="Windows 10到现在当然还不能说是压倒性胜利，不过根据Gartner的最新研究，Windows 10未来几个月的表现可能会非常出色，尤其是在企业市场，足以让Windows 10成为有史以来装机量增长最快的Windows系统。Gartner宣布，到2017年1月份，50%的企业就会开始进行部署Windows 10系统，这样的话就很有可能完成微软10亿装机量的计划。"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:gravity="left"
+            />
+
+        <ImageView
+            android:id="@+id/card_view_explore_user_upload_image"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/test_user_upload"
+            android:scaleType="fitStart"
+            android:layout_width="match_parent"
+            android:adjustViewBounds="true"
+            android:maxHeight="240.0dip"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

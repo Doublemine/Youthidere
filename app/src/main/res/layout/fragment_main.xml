@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--以下为公共页面头信息-->
+<!--<android.support.design.widget.CoordinatorLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context="work.wanghao.youthidere.MainActivity"-->
+    <!--android:fitsSystemWindows="true"-->
+    <!-->-->
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="256dp"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay"-->
+        <!--android:fitsSystemWindows="true"-->
+        <!-->-->
+        <!--<android.support.design.widget.CollapsingToolbarLayout-->
+            <!--android:id="@+id/collapsing_toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--app:contentScrim="?attr/colorPrimary"-->
+            <!--app:statusBarScrim="?attr/colorPrimary"-->
+            <!--app:expandedTitleMarginStart="48dp"-->
+            <!--app:expandedTitleMarginEnd="64dp"-->
+            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+            <!--android:fitsSystemWindows="true"-->
+            <!-->-->
+            <!--<ImageView-->
+                <!--android:id="@+id/ivImage"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--android:src="@drawable/nav_header_background_zise"-->
+                <!--app:layout_collapseMode="parallax"-->
+                <!--app:layout_collapseParallaxMultiplier="0.7"-->
+                <!--android:fitsSystemWindows="true"-->
+                <!--/>-->
+
+            <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?attr/actionBarSize"-->
+                <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+                <!--app:layout_collapseMode="pin"-->
+                <!--/>-->
+        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+    <!--以上为公共页面头信息-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/fragment_main_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#7e57c2"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="#e91e63"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="#ffffff"
+        app:tabTextColor="#bdbdbd"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/fragment_main_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>
+<!--</android.support.design.widget.CoordinatorLayout>-->

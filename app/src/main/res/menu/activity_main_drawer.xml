@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".MainActivity"
+    >
+
+    <group
+        android:checkableBehavior="none"
+        >
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_36dp"
+            android:title="@string/drawer_nav_item_home"/>
+        <item
+            android:id="@+id/nav_category"
+            android:icon="@drawable/ic_category_36dp"
+            android:title="@string/drawer_nav_item_category"/>
+        <item
+            android:id="@+id/nav_submit_for_publication"
+            android:icon="@drawable/ic_submit_for_artcle_36dp"
+            android:title="@string/drawer_nav_item_submit_for_publication"/>
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/ic_accrount_36dp"
+            android:title="@string/drawer_nav_item_account"/>
+    </group>
+
+
+        <group>
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings_36dp"
+        android:title="@string/drawer_nav_item_settings"/>
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/ic_about_36dp"
+        android:title="@string/drawer_nav_item_about"/>
+        </group>
+
+
+    <!--<item-->
+        <!--android:title="@string/drawer_nav_item_acknowledgements"-->
+        <!-->-->
+        <!--<menu>-->
+            <!--&lt;!&ndash;<item&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/nav_open_source_lib"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:title="@string/drawer_nav_item_open_source_library"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<item&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/nav_help"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:title="@string/drawer_nav_item_help"/>&ndash;&gt;-->
+
+            <!--<item-->
+                <!--android:id="@+id/nav_settings"-->
+                <!--android:icon="@drawable/ic_settings_36dp"-->
+                <!--android:title="@string/drawer_nav_item_settings"/>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_about"-->
+                <!--android:icon="@drawable/ic_about_36dp"-->
+                <!--android:title="@string/drawer_nav_item_about"/>-->
+        <!--</menu>-->
+    <!--</item>-->
+
+
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share"/>-->
+
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send"/>-->
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>
