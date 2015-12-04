@@ -3,10 +3,15 @@ package work.wanghao.youthidere;
 import android.app.Application;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.integration.okhttp.OkHttpUrlLoader;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.cache.DiskCache;
+import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.squareup.okhttp.OkHttpClient;
 
+import java.io.File;
 import java.io.InputStream;
 
 /**
@@ -15,20 +20,29 @@ import java.io.InputStream;
 public class SmileApplication extends Application {
     
 
-//    public static Realm postItemRealm;
+
     
     @Override
     public void onCreate() {
         super.onCreate();
         Glide.get(this).register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(new OkHttpClient()));
-//        RealmConfiguration postItemConfiguration=new RealmConfiguration.Builder(this).name("postItem.realm").build();
-//        postItemRealm=Realm.getGsonInstance(postItemConfiguration);
+        new GlideBuilder(this)
+                .setDiskCache(new DiskCache.Factory() {
+                    @Override
+                    public DiskCache build() {
+                        // Careful: the external cache directory doesn't enforce permissions
+                        File cacheLocation = new File(getExternalCacheDir(), "cache_dir_name");
+                        cacheLocation.mkdirs();
+                        return DiskLruCacheWrapper.get(cacheLocation, Integer.parseInt(getSharedPreferences("work.wanghao.youthidere_preferences", MODE_PRIVATE).getString("cache_size", "50")) * 1024 * 1024);
+                    }
+                });
+        new GlideBuilder(this)
+                .setDecodeFormat(DecodeFormat.PREFER_ARGB_8888);
     }
 
 
     @Override
     public void onTerminate() {
         super.onTerminate();
-//        postItemRealm.close();
     }
 }

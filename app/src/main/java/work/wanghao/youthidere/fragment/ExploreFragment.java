@@ -21,6 +21,7 @@ import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.adapter.RecyclerExploreAdapter;
 import work.wanghao.youthidere.model.Explore;
 import work.wanghao.youthidere.utils.HttpUtils;
+import work.wanghao.youthidere.utils.RealmUtils;
 
 /**
  * Created by wangh on 2015-11-26-0026.
@@ -152,7 +153,7 @@ public class ExploreFragment extends Fragment implements Handler.Callback,SwipeR
 
             @Override
             protected List<Explore> doInBackground(Integer... params) {
-                return HttpUtils.getNewExploreDataFromServer(params[0]);
+                return RealmUtils.getNewExploreDataFromRealm(params[0], getActivity());
 
             }
         };
@@ -190,7 +191,7 @@ public class ExploreFragment extends Fragment implements Handler.Callback,SwipeR
 
             @Override
             protected List<Explore> doInBackground(Integer... params) {
-                return HttpUtils.getOldExploreDataFromServer(params[0]);
+                return RealmUtils.getOldExploreDataFromRealm(params[0],getActivity());
 
             }
         };

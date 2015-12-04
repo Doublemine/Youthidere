@@ -6,6 +6,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.Sort;
 import work.wanghao.youthidere.model.PostItem;
 import work.wanghao.youthidere.utils.HttpUtils;
 
@@ -51,7 +52,7 @@ public class RealmDB {
             _data = mRealm.where(PostItem.class)
                     .lessThan("id", startId)
                     .greaterThanOrEqualTo("id", minId)
-                    .findAllSorted("id", false);
+                    .findAllSorted("id", Sort.DESCENDING);
 
             /**
              * 1.获取网络数据-->保存数据库--->查询--->返回
@@ -91,7 +92,7 @@ public class RealmDB {
                 _data = mRealm.where(PostItem.class)
                         .lessThan("id", startId)
                         .greaterThanOrEqualTo("id", minId)
-                        .findAllSorted("id", false);
+                        .findAllSorted("id", Sort.DESCENDING);
             }
         } else {//下拉刷新加载数据
             /**
@@ -132,7 +133,7 @@ public class RealmDB {
                 _data = mRealm.where(PostItem.class)
                         .greaterThan("id", startId)
                         .lessThanOrEqualTo("id", startId + DEFAULT_DATA_LENGTH)
-                        .findAllSorted("id", false);
+                        .findAllSorted("id", Sort.DESCENDING);
             }
 
         }
@@ -148,7 +149,7 @@ public class RealmDB {
      * @return
      */
     public List<PostItem> getCacheWhenCreate() {
-        int maxFlag = (int) mRealm.where(PostItem.class).maximumInt("id");
+        int maxFlag = (int) mRealm.where(PostItem.class).max("id");
         int minFlag = maxFlag - DEFAULT_DATA_LENGTH;
         if (maxFlag - DEFAULT_DATA_LENGTH <= 0) {
             minFlag = 0;
@@ -156,7 +157,7 @@ public class RealmDB {
         List<PostItem> items = mRealm.where(PostItem.class)
                 .lessThanOrEqualTo("id", maxFlag)
                 .greaterThan("id", minFlag)
-                .findAllSorted("id", false);
+                .findAllSorted("id", Sort.DESCENDING);
 
         return items;
     }

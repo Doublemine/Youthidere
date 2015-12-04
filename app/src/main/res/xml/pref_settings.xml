@@ -32,6 +32,7 @@
             android:key="cache_size"
             android:title="图片缓存大小"
             android:entries="@array/cache_name"
+            
             android:entryValues="@array/cache_value"
             android:defaultValue="@string/cache_default_value"
             android:summary="程序将使用内部储存空间来缓冲储存临时文件,默认空间大小为50Mib。"

@@ -19,6 +19,7 @@ import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.adapter.CommonItemAdapter;
 import work.wanghao.youthidere.model.PostItem;
 import work.wanghao.youthidere.utils.HttpUtils;
+import work.wanghao.youthidere.utils.RealmUtils;
 
 /**
  * Created by wangh on 2015-11-26-0026.
@@ -141,7 +142,7 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
 
             @Override
             protected List<PostItem> doInBackground(Integer... params) {
-                return HttpUtils.getNewImgDataFromServer(params[0]);
+                return RealmUtils.getNewImgDataFromRealm(params[0], getActivity());
 
             }
         };
@@ -178,7 +179,7 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
 
             @Override
             protected List<PostItem> doInBackground(Integer... params) {
-                return HttpUtils.getOldImgDataFromServer(params[0]);
+                return RealmUtils.getOldImgDataFromRealm(params[0],getActivity());
 
             }
         };

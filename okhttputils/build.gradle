@@ -23,5 +23,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.squareup.okhttp:okhttp:2.6.0'
-    compile 'io.realm:realm-android:0.81.1'
+    compile 'io.realm:realm-android:0.86.0'
 }
