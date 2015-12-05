@@ -19,7 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.dao.TokenDaoImpl;
 import work.wanghao.youthidere.model.Token;
-import work.wanghao.youthidere.utils.DbUtils;
+import work.wanghao.youthidere.utils.SQLiteUtils;
 
 /**
  * Created by wangh on 2015-11-29-0029.
@@ -76,7 +76,7 @@ public class AccountInfoFragment extends Fragment {
                 logout();
             }
         });
-        mCurrentToken = DbUtils.getCurrentLoginUserToken(getActivity());
+        mCurrentToken = SQLiteUtils.getCurrentLoginUserToken(getActivity());
         Glide.with(this).load(mCurrentToken.getUser().getAvatar_url()).into(userImage);
         userName.setText(mCurrentToken.getUser().getName());
         userEmail.setText(mCurrentToken.getUser().getEmail());
@@ -122,7 +122,7 @@ public class AccountInfoFragment extends Fragment {
     
     
     private void setAlreadyLoginHeader(){
-       Token token= DbUtils.getCurrentLoginUserToken(getActivity());
+       Token token= SQLiteUtils.getCurrentLoginUserToken(getActivity());
         mCallBack.setHeaderUserName(token.getUser().getName());
         mCallBack.setHeaderUserEmail(token.getUser().getEmail());
         mCallBack.setHeaderUserImageByUrl(token.getUser().getAvatar_url());

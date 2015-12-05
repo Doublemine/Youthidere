@@ -88,8 +88,7 @@ public class HttpUtils {
                 Log.e("执行了我", "----" + result + "-----");
                 return result;
             }
-
-            if (DbUtils.getTokenNum(context) <= 0) {
+            if (SQLiteUtils.getTokenNum(context) <= 0) {
                 TokenDaoImpl.getInstance(context).insertToken(response);
                 result = 0;
             } else {

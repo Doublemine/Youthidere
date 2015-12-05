@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
-import work.wanghao.youthidere.CategoryPageAdapter;
+import work.wanghao.youthidere.adapter.CategoryPageAdapter;
 import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.db.TabCategoriesHelper;
 import work.wanghao.youthidere.model.Category;

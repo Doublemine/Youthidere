@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import work.wanghao.youthidere.R;
-import work.wanghao.youthidere.SimpleFragmentPagerAdapter;
+import work.wanghao.youthidere.adapter.SimpleFragmentPagerAdapter;
 
 /**
  * Created by wangh on 2015-11-25-0025.

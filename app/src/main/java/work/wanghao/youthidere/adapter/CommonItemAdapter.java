@@ -14,6 +14,7 @@ import java.util.List;
 
 import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.model.PostItem;
+import work.wanghao.youthidere.utils.DateUtils;
 
 /**
  * Created by wangh on 2015-11-30-0030.
@@ -55,7 +56,7 @@ public class CommonItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         Log.e("当前的item", "序号：" + position + "id=" + postItemData.get(position).getId());
         Glide.with(context).load(item.getMain_img()).crossFade().into(holder.preImageView);
         holder.itemCategory.setText(item.getCategory().getName());
-        holder.itemCreateDate.setText(item.getCreated_at());
+        holder.itemCreateDate.setText(DateUtils.formatDateFromStr(item.getCreated_at()));
         holder.itemReadTime.setText(item.getViews_count());
         holder.itemTitle.setText(item.getTitle());
         holder.itemView.setTag(position);

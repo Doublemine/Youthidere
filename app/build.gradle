@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "work.wanghao.youthidere"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -33,4 +33,8 @@ dependencies {
     compile 'com.github.bumptech.glide:okhttp-integration:1.3.1'
     compile project(':okhttputils')
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
+    compile files('libs/jsoup-1.8.3.jar')
+    compile project(':googlemediaframework')
+    compile 'com.google.android.gms:play-services-ads:8.3.0'
+    compile files('libs/ima-android-sdk-beta13.3.jar')
 }
