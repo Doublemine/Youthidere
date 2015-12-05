@@ -28,7 +28,7 @@ import work.wanghao.youthidere.fragment.LoginFragment;
 import work.wanghao.youthidere.fragment.SignupFragment;
 import work.wanghao.youthidere.fragment.SubmitDataFragment;
 import work.wanghao.youthidere.model.Token;
-import work.wanghao.youthidere.utils.DbUtils;
+import work.wanghao.youthidere.utils.SQLiteUtils;
 import work.wanghao.youthidere.utils.NetUtils;
 
 public class MainActivity extends AppCompatActivity
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
         userHeadImage= (CircleImageView) headView.findViewById(R.id.nav_header_user_image);
         userName= (TextView) headView.findViewById(R.id.nav_header_username);
         userEmail= (TextView) headView.findViewById(R.id.nav_header_email);
-        isLoginToken=DbUtils.getCurrentLoginUserToken(this);
+        isLoginToken= SQLiteUtils.getCurrentLoginUserToken(this);
         if(isLoginToken!=null){
             ACCOUNT_FLAG=R.layout.activity_account_info;//设置账号列表标志位
             userName.setText(isLoginToken.getUser().getName());

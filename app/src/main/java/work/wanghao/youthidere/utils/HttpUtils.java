@@ -89,7 +89,7 @@ public class HttpUtils {
                 return result;
             }
 
-            if (DbUtils.getTokenNum(context) <= 0) {
+            if (SQLiteUtils.getTokenNum(context) <= 0) {
                 TokenDaoImpl.getInstance(context).insertToken(response);
                 result = 0;
             } else {
