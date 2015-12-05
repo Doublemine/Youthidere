@@ -8,6 +8,7 @@ import com.bumptech.glide.integration.okhttp.OkHttpUrlLoader;
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.cache.DiskCache;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
+import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -25,6 +26,7 @@ public class SmileApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        
         Glide.get(this).register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(new OkHttpClient()));
         new GlideBuilder(this)
                 .setDiskCache(new DiskCache.Factory() {
@@ -38,6 +40,8 @@ public class SmileApplication extends Application {
                 });
         new GlideBuilder(this)
                 .setDecodeFormat(DecodeFormat.PREFER_ARGB_8888);
+        new GlideBuilder(this)
+                .setMemoryCache(new LruResourceCache(0));
     }
 
 

@@ -1,6 +1,7 @@
 package work.wanghao.youthidere;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,7 @@ import work.wanghao.youthidere.fragment.SignupFragment;
 import work.wanghao.youthidere.fragment.SubmitDataFragment;
 import work.wanghao.youthidere.model.Token;
 import work.wanghao.youthidere.utils.DbUtils;
+import work.wanghao.youthidere.utils.NetUtils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-
+        NetUtils.setConnectivityManager((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE));
         initView();
 
 
@@ -119,6 +122,13 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("activity已经结束","Over");
     }
 
     @Override

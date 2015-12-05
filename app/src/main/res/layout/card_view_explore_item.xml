@@ -84,7 +84,7 @@
             android:gravity="left"
             />
 
-        <ImageView
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/card_view_explore_user_upload_image"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

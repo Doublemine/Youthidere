@@ -14,10 +14,13 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
 import work.wanghao.youthidere.CategoryPageAdapter;
 import work.wanghao.youthidere.R;
+import work.wanghao.youthidere.db.TabCategoriesHelper;
 import work.wanghao.youthidere.model.Category;
-import work.wanghao.youthidere.utils.HttpUtils;
+import work.wanghao.youthidere.utils.NetUtils;
+import work.wanghao.youthidere.utils.RealmUtils;
 
 /**
  * Created by wangh on 2015-11-25-0025.
@@ -36,9 +39,10 @@ public class CategoryFragment extends Fragment{
     private View mView;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
-    private List<Category> list;
+//    private List<Category> list;
     private List<CommonCategoryFragment> listFragment;
     private CategoryPageAdapter mAdapter;
+    private Realm mRealm;
 
     @Nullable
     @Override
@@ -51,6 +55,12 @@ public class CategoryFragment extends Fragment{
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mRealm= TabCategoriesHelper.getRealm(getActivity());
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mAdapter=new CategoryPageAdapter(getFragmentManager());
@@ -59,39 +69,41 @@ public class CategoryFragment extends Fragment{
     }
     
     private void initCategory(){
-        AsyncTask<Void,Void,List<Category>> getCategory=new AsyncTask<Void, Void, List<Category>>() {
+        AsyncTask<Void,Void,Integer> getCategoryFromRealm=new AsyncTask<Void, Void,Integer>() {
             @Override
-            protected void onPostExecute(List<Category> categories) {
-                if(categories==null){
+            protected void onPostExecute(Integer categories) {
+                List<Category> item=mRealm.where(Category.class)
+                        .findAll();
+                if(item.isEmpty()||item.size()==0){
                     return;
+                }
+                listFragment=new ArrayList<CommonCategoryFragment>();
+                for(int i=0;i<item.size();i++){
+                    listFragment.add(new CommonCategoryFragment(item.get(i)));
+                    Log.e("listFragment",String.valueOf(item.size()));
+                }
+
+                mAdapter.setData(listFragment);
+                mAdapter.setTitles(item);
+                mViewPager.setAdapter(mAdapter);
+                mTabLayout.setupWithViewPager(mViewPager);
+                mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+            }
+            @Override
+            protected Integer doInBackground(Void... params) {
+                if(NetUtils.isNetConnect()){
+                    return RealmUtils.isCategoriesDataFromRealm(getActivity());
                 }else {
-                    list=categories;
-                    Log.e("category",String.valueOf(categories.size()));
-                    Log.e("list为空？",String.valueOf(list.isEmpty()));
-                    listFragment=new ArrayList<CommonCategoryFragment>();
-                    for(int i=0;i<categories.size();i++){
-                        listFragment.add(new CommonCategoryFragment(list.get(i)));
-                        Log.e("listFragment",String.valueOf(list.size()));
-                    }
-                    
-                    mAdapter.setData(listFragment);
-                    mAdapter.setTitles(list);
-                    mViewPager.setAdapter(mAdapter);
-                    mTabLayout.setupWithViewPager(mViewPager);
-                    mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+                    return -1;
                 }
             }
-
-            @Override
-            protected void onPreExecute() {
-                list=new ArrayList<Category>();
-            }
-
-            @Override
-            protected List<Category> doInBackground(Void... params) {
-                return HttpUtils.getCategoriesDataFromServer();
-            }
         };
-        getCategory.execute();
+        getCategoryFromRealm.execute();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mRealm.close();
     }
 }

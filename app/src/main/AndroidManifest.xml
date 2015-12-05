@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="work.wanghao.youthidere"
           xmlns:android="http://schemas.android.com/apk/res/android">
-    
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:name=".SmileApplication"
         android:allowBackup="true"

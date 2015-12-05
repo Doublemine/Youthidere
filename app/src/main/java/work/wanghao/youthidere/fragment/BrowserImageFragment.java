@@ -3,6 +3,7 @@ package work.wanghao.youthidere.fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,10 +16,13 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.Sort;
 import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.adapter.CommonItemAdapter;
+import work.wanghao.youthidere.db.PostItemRealmHelper;
 import work.wanghao.youthidere.model.PostItem;
-import work.wanghao.youthidere.utils.HttpUtils;
+import work.wanghao.youthidere.utils.NetUtils;
 import work.wanghao.youthidere.utils.RealmUtils;
 
 /**
@@ -36,6 +40,8 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
     private int lastVisibleItem;
     private int firstItemID;
     private int endItemID;
+    private Realm mRealm;
+    private boolean isInit;
 
     private List<PostItem> adapterData = new ArrayList<PostItem>();
 
@@ -49,12 +55,13 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
 
     public static List<PostItem> items = new ArrayList<>();
 
-    public BrowserImageFragment() {}
+    public BrowserImageFragment() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCommonItemAdapter = new CommonItemAdapter(getActivity());
+        isInit=true;
     }
 
     @Nullable
@@ -62,136 +69,189 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.fragment_browser_image, container, false);
+        mRecyclerView = (RecyclerView) mView.findViewById(R.id.fragment_browser_image_rv);
         swipeRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.frg_browser_image_srfl);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
         swipeRefreshLayout.setOnRefreshListener(this);
-       
+
         return mView;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mRecyclerView = (RecyclerView) mView.findViewById(R.id.fragment_browser_image_rv);
+        mRealm = PostItemRealmHelper.getRealm(getActivity());
+        mCommonItemAdapter = new CommonItemAdapter(getActivity());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addOnScrollListener(mOnScrollListener);
         mRecyclerView.setAdapter(mCommonItemAdapter);
+        Log.e("mRealm", "realm对象已被创建");
         initAdapterData();
     }
 
     @Override
     public void onRefresh() {
-        reloadData();
+        loadData(firstItemID, true);;
     }
-
-    private void reloadData() {
-        swipeRefreshLayout.setRefreshing(true);
-        loadData(firstItemID, true);
-    }
-
-
+    
     private void loadMore() {
         if (isLoadMore) {
             return;
         }
-
         isLoadMore = true;
         loadData(endItemID, false);
     }
 
 
     private void initAdapterData() {
-        swipeRefreshLayout.setRefreshing(true);
-        loadData(0,true);
-    }
-
-    private void loadData(int startPage, boolean isNew) {
-        Log.e("开始载入数据", "--------------------->" + "startPage=" + startPage + "isNew=" + String.valueOf(isNew));
-        AsyncTask<Integer, Void, List<PostItem>> updateTask = new AsyncTask<Integer, Void, List<PostItem>>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
-            protected void onPostExecute(List<PostItem> items) {
-                if (items == null) {
-                    swipeRefreshLayout.setRefreshing(false);
-                    return;
+        if (isInit) {//载入cache
+            Number number = mRealm.where(PostItem.class).max("id");
+            if (number == null) {//本地没有缓存--->请求网络数据
+                if (NetUtils.isNetConnect()) {
+                    loadData(0, true);
                 } else {
-                    if (items.size() == 0) {
-                        swipeRefreshLayout.setRefreshing(false);
+                    Snackbar.make(mView, "无网络连接，无法从服务器上获取数据，请检查网络!", Snackbar.LENGTH_INDEFINITE).show();
+                }
+                
+            } else {//本地有缓存--->加载缓存
+
+                List<PostItem> initData = mRealm.where(PostItem.class)
+                        .lessThanOrEqualTo("id", number.intValue())
+                        .greaterThan("id", number.intValue() - 20)
+                        .findAllSorted("id", Sort.DESCENDING);
+
+                if (initData == null || initData.size() <= 0) {//没有数据---不太可能
+                    if (NetUtils.isNetConnect()) {//有网络-->请求数据
+                        Snackbar.make(mView, "你遇到了一个不常见的Bug，请访问：notes.wanghao.work反馈给作者吧:)", Snackbar.LENGTH_LONG).show();
+                    } else {//无网络
+                        Snackbar.make(mView, "你遇到了一个不常见的Bug，请访问：notes.wanghao.work反馈给作者吧:)", Snackbar.LENGTH_LONG).show();
+                    }
+                } else {//有数据
+                    adapterData.removeAll(initData);
+                    adapterData.addAll(initData);
+                    mCommonItemAdapter.updateItem(adapterData);
+                    endItemID = initData.get(initData.size() - 1).getId();
+                    firstItemID = initData.get(0).getId();
+                    isInit = false;
+                    //到这里缓存加载完毕接下来 看有无网络进行更新数据
+                    if (NetUtils.isNetConnect()) {//有网络--》更新数据
+                        loadData(number.intValue(), true);
+                    } else {//无网络
+                        Snackbar.make(mView, "无网络连接，先看看本地缓存吧!", Snackbar.LENGTH_INDEFINITE).show();
                         return;
                     }
-                    adapterData.addAll(items);
-                    mCommonItemAdapter.updateItem(adapterData);
-                    swipeRefreshLayout.setRefreshing(false);
-                    endItemID = items.get(items.size() - 1).getId();
-                    firstItemID = items.get(0).getId();
-                    Log.e("updateTask数据载入完毕", "--------------------->" + "lastVisibleItem=" + String.valueOf(swipeRefreshLayout.isRefreshing()));
-
                 }
             }
 
+        }
+
+
+    }
+
+    private void loadData(final int startPage, boolean isNew) {
+        Log.e("开始载入数据", "--------------------->" + "startPage=" + startPage + "isNew=" + String.valueOf(isNew));
+        AsyncTask<Integer, Void, Integer> loadNewDatafromRealmTask = new AsyncTask<Integer, Void, Integer>() {
+
             @Override
-            protected List<PostItem> doInBackground(Integer... params) {
-                return RealmUtils.getNewImgDataFromRealm(params[0], getActivity());
+            protected void onPreExecute() {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+
+            @Override
+            protected void onPostExecute(Integer integer) {
+                List<PostItem> realmData = null;
+                if(integer==-1){
+                    swipeRefreshLayout.setRefreshing(false);
+                    Snackbar.make(mView,"无网络连接，无法从服务器上获取数据，请检查网络!",Snackbar.LENGTH_SHORT).show();
+                    return;
+                }else {
+                    realmData=mRealm.where(PostItem.class)
+                            .greaterThan("id", startPage)
+                            .lessThanOrEqualTo("id", startPage + 20)
+                            .findAllSorted("id", Sort.DESCENDING);
+                }
+                if(realmData==null||realmData.size()<=0){
+                    swipeRefreshLayout.setRefreshing(false);
+                    Snackbar.make(mView,"已经是最新的数据咯~",Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                adapterData.removeAll(realmData);
+                adapterData.addAll(0, realmData);
+                mCommonItemAdapter.updateItem(adapterData);
+                swipeRefreshLayout.setRefreshing(false);
+                endItemID=realmData.get(realmData.size()-1).getId();
+                firstItemID=realmData.get(0).getId();
+            }
+
+            @Override
+            protected Integer doInBackground(Integer... params) {
+                if (NetUtils.isNetConnect()) {
+                    Log.e("网络连接", "网络已连接");
+                    return RealmUtils.isNewImgDataFromRealm(params[0], getActivity());
+                } else {
+                    return -1;
+                }
 
             }
         };
 
-        AsyncTask<Integer, Void, List<PostItem>> updateOldTask = new AsyncTask<Integer, Void, List<PostItem>>() {
+        AsyncTask<Integer, Void, Integer> loadOldDatafromRealmTask = new AsyncTask<Integer, Void, Integer>() {
             @Override
             protected void onPreExecute() {
-                super.onPreExecute();
+                swipeRefreshLayout.setRefreshing(true);
             }
 
             @Override
-            protected void onPostExecute(List<PostItem> items) {
-                if (items == null) {
+            protected void onPostExecute(Integer integer) {
+                List<PostItem> realmData=null;
+                realmData=mRealm.where(PostItem.class)
+                        .lessThan("id",startPage)
+                        .greaterThanOrEqualTo("id",startPage-20)
+                        .findAllSorted("id",Sort.DESCENDING);
+                if (realmData==null|| realmData.size() == 0) {
                     swipeRefreshLayout.setRefreshing(false);
-                    isLoadMore = false;
-                    return;
-                } else {
-                    if (items.size() == 0) {
-                        swipeRefreshLayout.setRefreshing(false);
-                        isLoadMore = false;
-                        return;
+                    isLoadMore=false;
+                    if(integer==-1){
+                        Snackbar.make(mView,"没有网络，加载不出来更多数据...",Snackbar.LENGTH_SHORT).show();  
+                    }else {
+                        Snackbar.make(mView,"已经到底咯~",Snackbar.LENGTH_SHORT).show();
                     }
-                    adapterData.addAll(items);
-                    mCommonItemAdapter.updateItem(adapterData);
-                    swipeRefreshLayout.setRefreshing(false);
-                    isLoadMore = false;
-                    endItemID = items.get(items.size() - 1).getId();
-                    firstItemID = items.get(0).getId();
-                    Log.e("updateOldTask数据载入完毕", "--------------------->" + "swipeRefreshLayout=" + String.valueOf(swipeRefreshLayout.isRefreshing()));
-
+                    return;
                 }
-//                Log.e("updateOldTask数据载入完毕", "--------------------->" + "swipeRefreshLayout=" + String.valueOf(swipeRefreshLayout.isRefreshing()));
+                adapterData.removeAll(realmData);
+                adapterData.addAll(realmData);
+                mCommonItemAdapter.updateItem(adapterData);
+                swipeRefreshLayout.setRefreshing(false);
+                endItemID=realmData.get(realmData.size()-1).getId();
+                isLoadMore=false;
             }
 
             @Override
-            protected List<PostItem> doInBackground(Integer... params) {
-                return RealmUtils.getOldImgDataFromRealm(params[0],getActivity());
-
+            protected Integer doInBackground(Integer... params) {
+                if (NetUtils.isNetConnect()) {
+                    return RealmUtils.isOldImgDataFromRealm(params[0], getActivity());
+                } else {
+                    return -1;
+                }
             }
         };
 
         if (isNew) {
-            updateTask.execute(startPage);
+            loadNewDatafromRealmTask.execute(startPage);
         } else {
-            updateOldTask.execute(startPage);
+            loadOldDatafromRealmTask.execute(startPage);
         }
 
     }
-
 
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
 
@@ -199,7 +259,6 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
             if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mCommonItemAdapter.getItemCount()) {
-                swipeRefreshLayout.setRefreshing(true);
                 loadMore();//载入更多数据
             }
         }
@@ -210,4 +269,6 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
             lastVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
         }
     };
+
+
 }

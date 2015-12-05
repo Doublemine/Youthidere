@@ -1,11 +1,13 @@
 package work.wanghao.youthidere.model;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by wangh on 2015-11-27-0027.
  */
 public class Category extends RealmObject{
+    @PrimaryKey
     private int id;
     private String icon;
     private String name;

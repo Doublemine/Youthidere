@@ -53,7 +53,6 @@ public class CommonItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private void bindCommonItem(int position, CommonViewHolder holder) {
         PostItem item=postItemData.get(position);
         Log.e("当前的item", "序号：" + position + "id=" + postItemData.get(position).getId());
-        
         Glide.with(context).load(item.getMain_img()).crossFade().into(holder.preImageView);
         holder.itemCategory.setText(item.getCategory().getName());
         holder.itemCreateDate.setText(item.getCreated_at());
@@ -73,16 +72,6 @@ public class CommonItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         postItemData.addAll(list);
         notifyDataSetChanged();
     }
-    
-    
-    public int getFirstId(){
-        return postItemData.get(0).getId();
-    }
-    public int getEndId(){
-        return postItemData.get(postItemData.size()-1).getId();
-    }
-    
-    
     @Override
     public void onClick(View v) {
         int position= (Integer) v.getTag();
