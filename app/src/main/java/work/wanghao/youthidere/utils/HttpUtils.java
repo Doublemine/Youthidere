@@ -24,10 +24,15 @@ import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.dao.TokenDaoImpl;
 import work.wanghao.youthidere.model.Category;
 import work.wanghao.youthidere.model.Explore;
+import work.wanghao.youthidere.model.Post;
 import work.wanghao.youthidere.model.PostItem;
 import work.wanghao.youthidere.model.RecItemJsonData;
 import work.wanghao.youthidere.model.ReceCategoryJsonData;
 import work.wanghao.youthidere.model.ReceExploreJsonData;
+import work.wanghao.youthidere.model.ReceFavoriteJsonData;
+import work.wanghao.youthidere.model.RecePostComment;
+import work.wanghao.youthidere.model.RecePostJsonData;
+import work.wanghao.youthidere.model.ReceVoteJsonData;
 import work.wanghao.youthidere.model.Token;
 
 /**
@@ -38,7 +43,7 @@ public class HttpUtils {
     private static final String LOGIN_ADDR = "http://www.qingniantuzhai.com/api/auth/login";
     private static final String RESISTER_ADDR = "http://www.qingniantuzhai.com/api/auth/register";
     private static final String BROWSER_UA = "Mozilla/5.0 (Linux U 10.0; Android 5.0;zh-CN; Doublemine Build/2015) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36";
-    private static final String CATEGORY_ADDR="http://www.qingniantuzhai.com/api/categories";
+    private static final String CATEGORY_ADDR = "http://www.qingniantuzhai.com/api/categories";
     private static Gson gson;
 
     public static Gson getGsonInstance() {
@@ -84,6 +89,35 @@ public class HttpUtils {
                     .post(Token.class);
 
             Log.e("登录token", response.toString());
+
+
+//
+////
+//            RecePostJsonData test = new OkHttpRequest.Builder()
+//                    .url("http://www.qingniantuzhai.com/api/posts/542?comments=3&")
+//                    .addHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8")
+//                    .addHeader("Connection", "Keep-Alive")
+//                    .addHeader("Accept-Encoding", "gzip")
+//                    .addHeader("User-Agent", context.getResources().getString(R.string.browser_ua))
+//                    .get(RecePostJsonData.class);
+//
+//            Log.e("RecePostJsonData", test.getPost().getContent());
+////            if(test!=null||test.getPost()!=null){
+//            
+//            List<ImgItem> testt = JsoupUtils.parseContent2ImgUrl(test.getPost().getContent());
+//            for (int i = 0; i < testt.size(); i++) {
+//                if(testt.get(i).getImgUrl().size()<=0){
+//                    continue;
+//                }
+//                Log.e("图片地址数据为", ">" + testt.get(i).toString() + "<");
+//            }
+//            }
+//            
+//           
+//            
+//            
+
+
             if (response.getError() != null) {
                 Log.e("执行了我", "----" + result + "-----");
                 return result;
@@ -343,9 +377,10 @@ public class HttpUtils {
 
     /**
      * 获取服务器分类数据
+     *
      * @return
      */
-    public static List<Category> getCategoriesDataFromServer(){
+    public static List<Category> getCategoriesDataFromServer() {
         List<Category> data = null;
         try {
             ReceCategoryJsonData receExploreJsonData = new OkHttpRequest.Builder()
@@ -366,58 +401,247 @@ public class HttpUtils {
 
     /**
      * get Category Data From Server
+     *
      * @param currentId
      * @param category
      * @return
      */
-    public static List<PostItem> getNewPostItemByCategoryFromServer(int currentId,String category){
-       String url="http://www.qingniantuzhai.com/api/posts?since_id="+currentId+"&count=20&category="+category+"&";
-        List<PostItem> data=null;
-        try{
-            RecItemJsonData recItemJsonData=new OkHttpRequest.Builder()
+    public static List<PostItem> getNewPostItemByCategoryFromServer(int currentId, String category) {
+        String url = "http://www.qingniantuzhai.com/api/posts?since_id=" + currentId + "&count=20&category=" + category + "&";
+        List<PostItem> data = null;
+        try {
+            RecItemJsonData recItemJsonData = new OkHttpRequest.Builder()
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
                     .addHeader(" User-Agent", BROWSER_UA)
                     .url(url)
                     .get(RecItemJsonData.class);
-            if(recItemJsonData==null||recItemJsonData.getPosts()==null){
+            if (recItemJsonData == null || recItemJsonData.getPosts() == null) {
                 return null;
             }
-            data=recItemJsonData.getPosts();
-            
-        }catch (IOException e){
-            Log.e("NewPostItemByCategory",e.toString());
+            data = recItemJsonData.getPosts();
+
+        } catch (IOException e) {
+            Log.e("NewPostItemByCategory", e.toString());
         }
         return data;
     }
 
     /**
-     * 
      * @param currentId
      * @param category
      * @return
      */
-    public static List<PostItem> getOldPostItemByCategoryFromServer(int currentId,String category){
-        String url="http://www.qingniantuzhai.com/api/posts?count=20&category="+category+"&max_id="+currentId+"&";
-        Log.e("url=",url);
-        List<PostItem> data=null;
-        try{
-            RecItemJsonData recItemJsonData=new OkHttpRequest.Builder()
+    public static List<PostItem> getOldPostItemByCategoryFromServer(int currentId, String category) {
+        String url = "http://www.qingniantuzhai.com/api/posts?count=20&category=" + category + "&max_id=" + currentId + "&";
+        Log.e("url=", url);
+        List<PostItem> data = null;
+        try {
+            RecItemJsonData recItemJsonData = new OkHttpRequest.Builder()
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
                     .addHeader("User-Agent", BROWSER_UA)
                     .url(url)
                     .get(RecItemJsonData.class);
-            if(recItemJsonData==null||recItemJsonData.getPosts()==null){
-                Log.e("OldPostItemByCategory","数据为空");
+            if (recItemJsonData == null || recItemJsonData.getPosts() == null) {
+                Log.e("OldPostItemByCategory", "数据为空");
                 return null;
             }
-            data=recItemJsonData.getPosts();
+            data = recItemJsonData.getPosts();
 
-        }catch (IOException e){
-            Log.e("OldPostItemByCategory",e.toString());
+        } catch (IOException e) {
+            Log.e("OldPostItemByCategory", e.toString());
         }
         return data;
+    }
+
+
+    public static RecePostJsonData getSignglePostDataFromServer(int id) {
+        String url = "http://www.qingniantuzhai.com/api/posts/" + id + "?comments=100&";
+        RecePostJsonData data = null;
+        try {
+            RecePostJsonData recePostJsonData = new OkHttpRequest.Builder()
+                    .addHeader("Connection", "Keep-Alive")
+                    .addHeader("Accept-Encoding", "gzip")
+                    .addHeader("User-Agent", BROWSER_UA)
+                    .url(url)
+                    .get(RecePostJsonData.class);
+            if (recePostJsonData == null || recePostJsonData.getPost() == null) {
+                return null;
+            }
+            data = recePostJsonData;
+            if (data.getPost().getCategory_slug().equals("video")) {
+                Post temp = data.getPost();
+                temp.setContent(JsoupUtils.parseContent2VideoUrl(data.getPost().getContent()));
+                data.setPost(temp);
+                Log.e("video地址解析为:", ">" + data.getPost().getContent() + "<");
+            }
+
+        } catch (IOException e) {
+            Log.e("网络异常", "网络异常导致获取数据失败:" + e.toString());
+        }
+        return data;
+    }
+
+
+    /**
+     * 给某一楼层评论回复
+     *
+     * @param token
+     * @param content
+     * @param post_id
+     * @param parent_id
+     * @return
+     */
+    public static boolean postCommentToServer(String token, String content, String post_id, String parent_id) {
+        String url = "http://www.qingniantuzhai.com/api/comments?token=" + token;
+        Log.e("url", url);
+        boolean Flag = false;
+        try {
+            RecePostComment commentResponse = new OkHttpRequest.Builder()
+                    .url(url)
+                    .addParams("content", content)
+                    .addParams("parent_id", parent_id)
+                    .addParams("post_id", post_id)
+                    .addHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8")
+                    .addHeader("Connection", "Keep-Alive")
+                    .addHeader("Accept-Encoding", "gzip;q=1.0,compress;q = 0.5")
+                    .addHeader("User-Agent", "Qingniantuzhai/com.qingniantuzhai.ios (3; OS Version 9.1 (Build 13B143))")
+                    .addHeader("Accept-Language", "zh-Hans;q= 1.0, en - US; q = 0.9")
+                    .post(RecePostComment.class);
+
+            if (commentResponse == null || commentResponse.getComment() == null) {
+                Flag = false;
+            } else {
+                if (content.equals(commentResponse.getComment().getContent())) {
+                    Flag = true;
+                }
+            }
+        } catch (IOException e) {
+
+            Log.e("评论提交错误", e.toString());
+            Flag = false;
+        } catch (Exception e) {
+            Log.e("评论提交错误", e.toString());
+            Flag = false;
+        }
+        return Flag;
+    }
+
+
+    /**
+     * 给某一篇文章评论
+     *
+     * @param token
+     * @param content
+     * @param post_id
+     * @return
+     */
+    public static boolean postSingleCommentToServer(String token, String content, String post_id) {
+        String url = "http://www.qingniantuzhai.com/api/comments?token=" + token;
+        Log.e("url", url);
+        boolean Flag = false;
+        try {
+            RecePostComment commentResponse = new OkHttpRequest.Builder()
+                    .url(url)
+                    .addParams("content", content)
+                    .addParams("post_id", post_id)
+                    .addHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8")
+                    .addHeader("Connection", "Keep-Alive")
+                    .addHeader("Accept-Encoding", "gzip;q=1.0,compress;q = 0.5")
+                    .addHeader("User-Agent", "Qingniantuzhai/com.qingniantuzhai.ios (3; OS Version 9.1 (Build 13B143))")
+                    .addHeader("Accept-Language", "zh-Hans;q= 1.0, en - US; q = 0.9")
+                    .post(RecePostComment.class);
+
+            if (commentResponse == null || commentResponse.getComment() == null) {
+                Flag = false;
+            } else {
+                if (content.equals(commentResponse.getComment().getContent())) {
+                    Flag = true;
+                }
+            }
+        } catch (IOException e) {
+
+            Log.e("评论提交错误", e.toString());
+            Flag = false;
+        } catch (Exception e) {
+            Log.e("评论提交错误", e.toString());
+            Flag = false;
+        }
+        return Flag;
+    }
+
+
+    public static boolean postVoteToServer(String token, String comment_id, int current_user_id) {
+        boolean flag = false;
+        String url = "http://www.qingniantuzhai.com/api/comments/vote?token=" + token;
+        try {
+            ReceVoteJsonData voteData = new OkHttpRequest.Builder()
+                    .url(url)
+                    .addParams("comment_id", comment_id)
+                    .addHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8")
+                    .addHeader("Connection", "Keep-Alive")
+                    .addHeader("Accept-Encoding", "gzip;q=1.0,compress;q = 0.5")
+                    .addHeader("User-Agent", "Qingniantuzhai/com.qingniantuzhai.ios (3; OS Version 9.1 (Build 13B143))")
+                    .addHeader("Accept-Language", "zh-Hans;q= 1.0, en - US; q = 0.9")
+                    .post(ReceVoteJsonData.class);
+
+            if (voteData == null || voteData.getVote() == null) {
+                flag = false;
+            } else {
+
+                if (voteData.getVote().getUser_id() == current_user_id) {
+                    flag = true;
+                }
+            }
+        } catch (IOException e) {
+            flag = false;
+            Log.e("点赞错误", "错误内容为:" + e.toString());
+        } catch (Exception e) {
+            flag = false;
+            Log.e("点赞错误", "错误内容为:" + e.toString());
+        }
+        return flag;
+    }
+
+    /**
+     * 收藏某一篇文章
+     *
+     * @return
+     */
+    public static boolean postStarToServer(String token, String postId) {
+        boolean flag = false;
+        String url = "http://www.qingniantuzhai.com/api/favorites?token=" + token;
+        try {
+            ReceFavoriteJsonData voteData = new OkHttpRequest.Builder()
+                    .url(url)
+                    .addParams("type", "post")
+                    .addParams("object_id", postId)
+                    .addHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8")
+                    .addHeader("Connection", "Keep-Alive")
+                    .addHeader("Accept-Encoding", "gzip;q=1.0,compress;q = 0.5")
+                    .addHeader("User-Agent", "Qingniantuzhai/com.qingniantuzhai.ios (3; OS Version 9.1 (Build 13B143))")
+                    .addHeader("Accept-Language", "zh-Hans;q= 1.0, en - US; q = 0.9")
+                    .post(ReceFavoriteJsonData.class);
+
+            if (voteData == null || voteData.getFavorite() == null) {
+                flag = false;
+            } else {
+                if (postId.equals(String.valueOf(voteData.getFavorite().getObject_id()))) {
+                    flag = true;
+                }
+            }
+
+
+        } catch (IOException e) {
+            Log.e("收藏错误", e.toString());
+            flag = false;
+        } catch (Exception e) {
+            Log.e("收藏错误", e.toString());
+            flag = false;
+        }
+        return flag;
+        
     }
 
 }

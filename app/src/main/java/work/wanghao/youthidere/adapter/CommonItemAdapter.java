@@ -1,6 +1,7 @@
 package work.wanghao.youthidere.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import work.wanghao.youthidere.R;
+import work.wanghao.youthidere.activity.VideoPlayActivity;
 import work.wanghao.youthidere.model.PostItem;
 import work.wanghao.youthidere.utils.DateUtils;
 
@@ -56,13 +58,21 @@ public class CommonItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         Log.e("当前的item", "序号：" + position + "id=" + postItemData.get(position).getId());
         Glide.with(context).load(item.getMain_img()).crossFade().into(holder.preImageView);
         holder.itemCategory.setText(item.getCategory().getName());
-        holder.itemCreateDate.setText(DateUtils.formatDateFromStr(item.getCreated_at()));
+        holder.itemCreateDate.setText(DateUtils.formatDateFromStrWithoutHour(item.getCreated_at()));
         holder.itemReadTime.setText(item.getViews_count());
         holder.itemTitle.setText(item.getTitle());
         holder.itemView.setTag(position);
         
     }
 
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        holder.itemView.clearAnimation();
+    }
+
+    
+    
     @Override
     public int getItemCount() {
         return postItemData.size();
@@ -77,12 +87,19 @@ public class CommonItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onClick(View v) {
         int position= (Integer) v.getTag();
         int posts=postItemData.get(position).getId();
-        Log.e("item被点击了","id号为"+posts+"的item被点击了");
+        Log.e("item被点击了", "id号为" + posts + "的item被点击了");
+        Intent intent=new Intent(context, VideoPlayActivity.class);
+        intent.putExtra("category_slug",postItemData.get(position).getCategory_slug());
+        intent.putExtra("post_id",posts);
+        context.startActivity(intent);
     }
-    
-    
-    
-    
+
+
+    @Override
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+    }
+
     public static class CommonViewHolder extends RecyclerView.ViewHolder{
 
         public android.widget.ImageView preImageView;

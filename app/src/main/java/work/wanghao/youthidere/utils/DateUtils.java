@@ -20,19 +20,41 @@ public class DateUtils {
         }
         return sdfres;
     }
-    private static SimpleDateFormat getSdfdes(){
+    private static SimpleDateFormat getSdfdesWithoutHours(){
         if(sdfdes==null){
             sdfdes=new SimpleDateFormat("yyyy年MM月dd日");
         }
         return sdfdes;
     }
+
+    private static SimpleDateFormat getSdfdesWithHours(){
+        if(sdfdes==null){
+            sdfdes=new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        }
+        return sdfdes;
+    }
     
     
-    public static String formatDateFromStr(String dateStr){
+    public static String formatDateFromStrWithoutHour(String dateStr){
        String strDate=null;
         if(!TextUtils.isEmpty(dateStr)){
             SimpleDateFormat sdfres=getSdfres();
-            SimpleDateFormat sdfdes=getSdfdes();
+            SimpleDateFormat sdfdes= getSdfdesWithoutHours();
+            try {
+                Date date=sdfres.parse(dateStr);
+                strDate=sdfdes.format(date);
+            }catch (Exception e){
+                Log.e("DateUtils","时间转换错误:"+e.toString());
+            }
+        }
+        return strDate;
+    }
+
+    public static String formatDateFromStrWithHour(String dateStr){
+        String strDate=null;
+        if(!TextUtils.isEmpty(dateStr)){
+            SimpleDateFormat sdfres=getSdfres();
+            SimpleDateFormat sdfdes= getSdfdesWithHours();
             try {
                 Date date=sdfres.parse(dateStr);
                 strDate=sdfdes.format(date);

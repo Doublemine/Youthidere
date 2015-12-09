@@ -16,17 +16,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp">
+
         <ImageView
             android:id="@+id/item_main_card_view_image"
             android:layout_width="120dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:src="@drawable/test_main"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:paddingLeft="10dp">
+
             <TextView
                 android:id="@+id/item_main_card_view_title"
                 android:layout_width="match_parent"
@@ -39,47 +42,139 @@
                 android:textSize="18sp"
                 android:textStyle="normal"
                 />
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:orientation="horizontal"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp">
 
+
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!-->-->
+
+                    <!--<ImageView-->
+                        <!--android:id="@+id/temp_img_create_at"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentLeft="true"-->
+                        <!--android:layout_alignParentStart="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:src="@drawable/ic_create_date_18dp"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/item_main_card_view_create_time"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:layout_toEndOf="@+id/temp_img_create_at"-->
+                        <!--android:layout_toRightOf="@+id/temp_img_create_at"-->
+                        <!--android:text="1024"-->
+                        <!--android:singleLine="true"-->
+                        <!--android:textSize="10sp"/>-->
+
+                <!--</RelativeLayout>-->
+
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!-->-->
+
+                    <!--<ImageView-->
+                        <!--android:id="@+id/temp_img_view_category"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentLeft="true"-->
+                        <!--android:layout_alignParentStart="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:src="@drawable/ic_categories_18dp"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/item_main_card_view_category"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:layout_toEndOf="@+id/temp_img_view_category"-->
+                        <!--android:layout_toRightOf="@+id/temp_img_view_category"-->
+                        <!--android:text="图摘"-->
+                        <!--android:singleLine="true"-->
+                        <!--android:textSize="10sp"/>-->
+
+                <!--</RelativeLayout>-->
+
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!-->-->
+
+                    <!--<ImageView-->
+                        <!--android:id="@+id/temp_img_read_time"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentLeft="true"-->
+                        <!--android:layout_alignParentStart="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:src="@drawable/ic_read_time_18dp"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/item_main_card_view_read_time"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:layout_toEndOf="@+id/temp_img_read_time"-->
+                        <!--android:layout_toRightOf="@+id/temp_img_read_time"-->
+                        <!--android:text="1024"-->
+                        <!--android:singleLine="true"-->
+                        <!-- -->
+                        <!--android:textSize="10sp"/>-->
+
+                <!--</RelativeLayout>-->
                 <TextView
-                    android:id="@+id/item_main_card_view_create_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_create_date_18dp"
-                    android:gravity="center"
-                    android:padding="-5dp"
-                    android:text="2015-11-24"
-                    android:textSize="12sp"/>
+                android:id="@+id/item_main_card_view_create_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_create_date_18dp"
+                android:gravity="center"
+                android:ellipsize="marquee"
+                android:text="2015-11-24"
+                android:singleLine="true"
+                android:textSize="@dimen/Item_main_text_size"/>
                 <TextView
-                    android:id="@+id/item_main_card_view_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_categories_18dp"
-                    android:drawablePadding="-5dp"
-                    android:gravity="center"
-                    android:text="图摘"
-                    android:textSize="12sp"/>
+                android:id="@+id/item_main_card_view_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_categories_18dp"
+                android:ellipsize="marquee"
+                android:gravity="center"
+                android:text="图摘"
+                android:singleLine="true"
+                android:textSize="@dimen/Item_main_text_size"/>
                 <TextView
-                    android:id="@+id/item_main_card_view_read_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_read_time_18dp"
-                    android:drawablePadding="-5dp"
-                    android:gravity="center"
-                    android:text="2088次阅读"
-                    android:textSize="12sp"/>
+                android:id="@+id/item_main_card_view_read_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_read_time_18dp"
+                android:ellipsize="marquee"
+                android:gravity="center"
+                android:text="2088次阅读"
+                android:singleLine="true"
+                android:textSize="@dimen/Item_main_text_size"/>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

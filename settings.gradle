@@ -1,1 +1,1 @@
-include ':app', ':okhttputils', ':library', ':vitamio', ':googlemediaframework'
+include ':app', ':okhttputils', ':googlemediaframework'

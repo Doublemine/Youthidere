@@ -20,6 +20,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.Sort;
+import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.adapter.RecyclerExploreAdapter;
 import work.wanghao.youthidere.db.ExploreItemRealmHelper;
@@ -86,7 +87,11 @@ public class ExploreFragment extends Fragment implements Handler.Callback, Swipe
         super.onActivityCreated(savedInstanceState);
 //        mAdapter=new RecyclerExploreAdapter(getActivity());
         mRecyclerView.addOnScrollListener(mScrollListener);
-        mRecyclerView.setAdapter(mAdapter);
+
+        SlideInBottomAnimationAdapter scaleInAnimationAdapter=new SlideInBottomAnimationAdapter(mAdapter);
+        scaleInAnimationAdapter.setFirstOnly(false);
+//        scaleInAnimationAdapter.setDuration(800);
+        mRecyclerView.setAdapter(scaleInAnimationAdapter);
         initAdapterData();
     }
 
@@ -189,10 +194,22 @@ public class ExploreFragment extends Fragment implements Handler.Callback, Swipe
                     Snackbar.make(mView,"无网络连接，无法从服务器上获取数据，请检查网络!",Snackbar.LENGTH_SHORT).show();
                     return;
                 } else {//有网络连接
-                    realmData = mRealm.where(Explore.class)
-                            .greaterThan("id", startId)
-                            .lessThanOrEqualTo("id", startId + 20)
-                            .findAllSorted("id", Sort.DESCENDING);
+                    if(startId==0){
+                        int maxid=mRealm.where(Explore.class).max("id").intValue();
+                        realmData = mRealm.where(Explore.class)
+                                .lessThanOrEqualTo("id", maxid)
+                                .greaterThan("id",maxid -20)
+                                .findAllSorted("id", Sort.DESCENDING);
+                        if(realmData.size()>20){
+                            realmData=realmData.subList(0,19);
+                        }
+                    }else {
+                        realmData = mRealm.where(Explore.class)
+                                .greaterThan("id", startId)
+                                .lessThanOrEqualTo("id", startId + 20)
+                                .findAllSorted("id", Sort.DESCENDING);
+                    }
+                    
                 }
                
                 if (realmData==null || realmData.size() == 0) {

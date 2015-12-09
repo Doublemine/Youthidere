@@ -3,7 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/libs/ima-android-sdk-beta13.3.jar" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/work/wanghao/youthidere/adapter/ImaPlayer.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/work/wanghao/youthidere/adapter/ImaPlayer.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_listview_item.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/item_color.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/preference_category_widget.xml" charset="GBK" />

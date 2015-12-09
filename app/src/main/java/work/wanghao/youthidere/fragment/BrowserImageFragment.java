@@ -18,6 +18,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.Sort;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.adapter.CommonItemAdapter;
 import work.wanghao.youthidere.db.PostItemRealmHelper;
@@ -93,7 +94,10 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
         mCommonItemAdapter = new CommonItemAdapter(getActivity());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addOnScrollListener(mOnScrollListener);
-        mRecyclerView.setAdapter(mCommonItemAdapter);
+        ScaleInAnimationAdapter scaleInAnimationAdapter=new ScaleInAnimationAdapter(mCommonItemAdapter);
+        scaleInAnimationAdapter.setFirstOnly(false);
+//        scaleInAnimationAdapter.setDuration(600);
+        mRecyclerView.setAdapter(scaleInAnimationAdapter);
         Log.e("mRealm", "realm对象已被创建");
         initAdapterData();
     }
@@ -157,6 +161,8 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
 
     }
 
+
+
     private void loadData(final int startPage, boolean isNew) {
         Log.e("开始载入数据", "--------------------->" + "startPage=" + startPage + "isNew=" + String.valueOf(isNew));
         AsyncTask<Integer, Void, Integer> loadNewDatafromRealmTask = new AsyncTask<Integer, Void, Integer>() {
@@ -173,11 +179,22 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
                     swipeRefreshLayout.setRefreshing(false);
                     Snackbar.make(mView,"无网络连接，无法从服务器上获取数据，请检查网络!",Snackbar.LENGTH_SHORT).show();
                     return;
-                }else {
-                    realmData=mRealm.where(PostItem.class)
-                            .greaterThan("id", startPage)
-                            .lessThanOrEqualTo("id", startPage + 20)
-                            .findAllSorted("id", Sort.DESCENDING);
+                }else {//此处需要判定是否为0，否则会取不到数据
+                    if(startPage==0){
+                        int maxid=mRealm.where(PostItem.class).max("id").intValue();
+                        realmData = mRealm.where(PostItem.class)
+                                .lessThanOrEqualTo("id", maxid)
+                                .greaterThan("id",maxid -20)
+                                .findAllSorted("id", Sort.DESCENDING);
+                        if(realmData.size()>20){
+                            realmData=realmData.subList(0,19);
+                        }
+                    }else {
+                        realmData = mRealm.where(PostItem.class)
+                                .greaterThan("id", startPage)
+                                .lessThanOrEqualTo("id", startPage + 20)
+                                .findAllSorted("id", Sort.DESCENDING);
+                    }
                 }
                 if(realmData==null||realmData.size()<=0){
                     swipeRefreshLayout.setRefreshing(false);

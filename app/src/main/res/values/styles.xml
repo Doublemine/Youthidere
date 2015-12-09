@@ -40,4 +40,13 @@
         <item name="android:background">@color/primary</item>
     </style>
 
+
+
+    <style name="MenuButtonsNormal_Comments">
+        <item name="fab_size">normal</item>
+        <item name="fab_colorNormal">#ec407a</item>
+        <item name="fab_colorPressed">#E91e63</item>
+        <item name="fab_colorRipple">#f06292</item>
+    </style>
+
 </resources>
