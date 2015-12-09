@@ -89,35 +89,6 @@ public class HttpUtils {
                     .post(Token.class);
 
             Log.e("登录token", response.toString());
-
-
-//
-////
-//            RecePostJsonData test = new OkHttpRequest.Builder()
-//                    .url("http://www.qingniantuzhai.com/api/posts/542?comments=3&")
-//                    .addHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8")
-//                    .addHeader("Connection", "Keep-Alive")
-//                    .addHeader("Accept-Encoding", "gzip")
-//                    .addHeader("User-Agent", context.getResources().getString(R.string.browser_ua))
-//                    .get(RecePostJsonData.class);
-//
-//            Log.e("RecePostJsonData", test.getPost().getContent());
-////            if(test!=null||test.getPost()!=null){
-//            
-//            List<ImgItem> testt = JsoupUtils.parseContent2ImgUrl(test.getPost().getContent());
-//            for (int i = 0; i < testt.size(); i++) {
-//                if(testt.get(i).getImgUrl().size()<=0){
-//                    continue;
-//                }
-//                Log.e("图片地址数据为", ">" + testt.get(i).toString() + "<");
-//            }
-//            }
-//            
-//           
-//            
-//            
-
-
             if (response.getError() != null) {
                 Log.e("执行了我", "----" + result + "-----");
                 return result;

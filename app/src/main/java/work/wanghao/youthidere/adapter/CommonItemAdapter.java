@@ -58,7 +58,9 @@ public class CommonItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         Log.e("当前的item", "序号：" + position + "id=" + postItemData.get(position).getId());
         Glide.with(context).load(item.getMain_img()).crossFade().into(holder.preImageView);
         holder.itemCategory.setText(item.getCategory().getName());
+
         holder.itemCreateDate.setText(DateUtils.formatDateFromStrWithoutHour(item.getCreated_at()));
+
         holder.itemReadTime.setText(item.getViews_count());
         holder.itemTitle.setText(item.getTitle());
         holder.itemView.setTag(position);

@@ -20,12 +20,14 @@ public class DateUtils {
         }
         return sdfres;
     }
+
     private static SimpleDateFormat getSdfdesWithoutHours(){
         if(sdfdes==null){
             sdfdes=new SimpleDateFormat("yyyy年MM月dd日");
         }
         return sdfdes;
     }
+
 
     private static SimpleDateFormat getSdfdesWithHours(){
         if(sdfdes==null){
@@ -50,6 +52,7 @@ public class DateUtils {
         return strDate;
     }
 
+
     public static String formatDateFromStrWithHour(String dateStr){
         String strDate=null;
         if(!TextUtils.isEmpty(dateStr)){
@@ -64,6 +67,7 @@ public class DateUtils {
         }
         return strDate;
     }
+
     
    
 }
