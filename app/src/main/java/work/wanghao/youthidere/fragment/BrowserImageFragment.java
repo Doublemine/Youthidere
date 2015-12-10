@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.clans.fab.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,8 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
     private int endItemID;
     private Realm mRealm;
     private boolean isInit;
+    private FloatingActionButton mFab;
+    private int mScrollOffset=4;
 
     private List<PostItem> adapterData = new ArrayList<PostItem>();
 
@@ -70,6 +74,7 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.fragment_browser_image, container, false);
+        mFab= (FloatingActionButton) mView.findViewById(R.id.fab_menu_return_top);
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.fragment_browser_image_rv);
         swipeRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.frg_browser_image_srfl);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -94,6 +99,12 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
         mCommonItemAdapter = new CommonItemAdapter(getActivity());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addOnScrollListener(mOnScrollListener);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRecyclerView.scrollToPosition(0);
+            }
+        });
         ScaleInAnimationAdapter scaleInAnimationAdapter=new ScaleInAnimationAdapter(mCommonItemAdapter);
         scaleInAnimationAdapter.setFirstOnly(false);
 //        scaleInAnimationAdapter.setDuration(600);
@@ -284,6 +295,13 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
             lastVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+            if (Math.abs(dy) > mScrollOffset) {
+                if (dy > 0) {
+                    mFab.hide(true);
+                } else {
+                    mFab.show(true);
+                }
+            }
         }
     };
 

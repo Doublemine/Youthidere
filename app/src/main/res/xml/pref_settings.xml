@@ -65,7 +65,7 @@
             android:title="关于作者"
             android:summary="欢迎访问我的博客">
             <intent android:action="android.intent.action.VIEW"
-                    android:data="https://notes.wanghao.work"/>
+                    android:data="http://notes.xiamo.tk"/>
         </Preference>
         
     </PreferenceCategory>

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import work.wanghao.youthidere.R;
+import work.wanghao.youthidere.activity.ImageDisplayActivity;
 import work.wanghao.youthidere.activity.VideoPlayActivity;
 import work.wanghao.youthidere.model.PostItem;
 import work.wanghao.youthidere.utils.DateUtils;
@@ -90,7 +91,13 @@ public class CommonItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         int position= (Integer) v.getTag();
         int posts=postItemData.get(position).getId();
         Log.e("item被点击了", "id号为" + posts + "的item被点击了");
-        Intent intent=new Intent(context, VideoPlayActivity.class);
+        Intent intent=null;
+        if("video".equals(postItemData.get(position).getCategory_slug())){
+            intent =new Intent(context, VideoPlayActivity.class);
+        }else {
+            intent =new Intent(context, ImageDisplayActivity.class);
+        }
+       
         intent.putExtra("category_slug",postItemData.get(position).getCategory_slug());
         intent.putExtra("post_id",posts);
         context.startActivity(intent);
