@@ -3,6 +3,8 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <application
         android:name=".app.SmileApplication"
         android:allowBackup="true"
@@ -15,6 +17,8 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <!--<meta-data android:name="work.wanghao.youthidere.config.GlideConfig"-->
+                   <!--android:value="GlideModule"/>-->
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
@@ -46,6 +50,10 @@
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/title_activity_settings">
+        </activity>
+        <activity android:name=".activity.PreViewImageActivity"
+                  >
+            
         </activity>
     </application>
 
