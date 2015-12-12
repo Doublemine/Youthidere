@@ -1,32 +1,54 @@
 package work.wanghao.youthidere.fragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.Sort;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
+import pl.droidsonroids.gif.GifImageView;
 import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.adapter.RecyclerExploreAdapter;
+import work.wanghao.youthidere.config.GlobalConfig;
 import work.wanghao.youthidere.db.ExploreItemRealmHelper;
 import work.wanghao.youthidere.model.Explore;
+import work.wanghao.youthidere.model.Token;
+import work.wanghao.youthidere.utils.HttpUtils;
 import work.wanghao.youthidere.utils.NetUtils;
 import work.wanghao.youthidere.utils.RealmUtils;
+import work.wanghao.youthidere.utils.SQLiteUtils;
 
 /**
  * Created by wangh on 2015-11-26-0026.
@@ -42,6 +64,10 @@ public class ExploreFragment extends Fragment implements Handler.Callback, Swipe
     private List<Explore> mdata;
     private int firstItemID;
     private int endItemID;
+    
+    private FloatingActionMenu mFabMenu;
+    private FloatingActionButton mFabCamera;
+    private FloatingActionButton mFabPhotoLib;
 
     private Realm mRealm;
 
@@ -72,6 +98,9 @@ public class ExploreFragment extends Fragment implements Handler.Callback, Swipe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_explore, container, false);
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.fragment_explore_rv);
+        mFabMenu= (FloatingActionMenu) mView.findViewById(R.id.fab_menu);
+        mFabCamera= (FloatingActionButton) mView.findViewById(R.id.fab_menu_camera);
+        mFabPhotoLib= (FloatingActionButton) mView.findViewById(R.id.fab_menu_photo);
         swipeRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.frg_explore_srfl);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_green_light, android.R.color.holo_orange_light,
@@ -93,6 +122,20 @@ public class ExploreFragment extends Fragment implements Handler.Callback, Swipe
 //        scaleInAnimationAdapter.setDuration(800);
         mRecyclerView.setAdapter(scaleInAnimationAdapter);
         initAdapterData();
+        mFabPhotoLib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mFabMenu.close(true);
+                openPhotoLib();
+            }
+        });
+        mFabCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mFabMenu.close(true);
+                doTakePhoto();
+            }
+        });
     }
 
     @Override
@@ -320,4 +363,151 @@ public class ExploreFragment extends Fragment implements Handler.Callback, Swipe
             lastVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
         }
     };
+    
+    
+    
+    
+    
+    
+    
+    
+    public void  createUploadAlert(final File imageFile){
+        View view=LayoutInflater.from(getActivity()).inflate(R.layout.alert_explore_upload_image,null);
+        final EditText textContent= (EditText) view.findViewById(R.id.alert_input_text);
+        GifImageView imageView= (GifImageView) view.findViewById(R.id.alert_preview_image);
+        final AlertDialog.Builder contentAlert=new AlertDialog.Builder(getActivity());
+        contentAlert.setView(view);
+        contentAlert.setCancelable(false);
+        Glide.with(this).load(imageFile).asBitmap().into(imageView);
+        Token token= SQLiteUtils.getCurrentLoginUserToken(getActivity());
+        String strToken=null;
+        if (token == null) {
+            Snackbar.make(mView, "将以游客的身份上传图片", Snackbar.LENGTH_SHORT).show();
+        }else {
+            strToken=token.getToken();
+        }
+        
+        final String finStrToken=strToken;
+        contentAlert.setPositiveButton("上传", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                final String commentContent = textContent.getText().toString().trim();
+                if (commentContent.length() <= 0) {
+                    Snackbar.make(mView, "起码你也得说两句呗~", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+
+                AsyncTask<String, Void, Boolean> postComment = new AsyncTask<String, Void, Boolean>() {
+                    @Override
+                    protected void onPostExecute(Boolean aBoolean) {
+                        if (aBoolean) {
+                            Snackbar.make(mView, "上传成功", Snackbar.LENGTH_SHORT).show();
+                            onRefresh();
+
+                        } else {
+                            Snackbar.make(mView, "因为一些错误导致上传失败", Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    protected Boolean doInBackground(String... params) {
+                        if (NetUtils.isNetConnect()) {
+                            return HttpUtils.uploadImageToServer(params[0], params[1], imageFile);
+                        } else {
+                            return false;
+                        }
+                    }
+                };
+                postComment.execute(finStrToken, commentContent);
+            }
+        });
+        contentAlert.setNegativeButton("取消", null);
+        contentAlert.show();
+    }
+
+
+    /**
+     * 拍照函数
+     */
+    public void doTakePhoto(){
+        Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        String path=Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"XiaMo";
+        File file=new File(path);
+        if(!file.exists()){
+            file.mkdir();
+        }
+        Uri imageUri=Uri.fromFile(new File(path+File.separator+GlobalConfig.TEMP_CAMERA_IMG));
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+        startActivityForResult(intent, GlobalConfig.PAHTO_WITH_CAMERA);
+        
+    }
+    
+    public void openPhotoLib(){
+        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent,GlobalConfig.CHOOSE_PHOTO);
+    }
+
+    
+    public String getRealPathFromUri(Uri contentUri){
+        String result=null;
+        try {
+            
+        
+        Cursor cursor=getActivity().getContentResolver().query(contentUri,null,null,null,null);
+        if(cursor==null){
+            result =contentUri.getPath();
+        }else {
+            cursor.moveToFirst();
+            int idx=cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result=cursor.getString(idx);
+            cursor.close();
+        }
+        }catch (Exception e){
+            Toast.makeText(getActivity(),"请使用系统相册选择照片",Toast.LENGTH_LONG).show();
+        }
+        return result;
+    }
+    
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==GlobalConfig.RESULT_OK){
+            switch (requestCode){
+                case GlobalConfig.PAHTO_WITH_CAMERA:
+                    String cemareImageFilePath=Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator
+                            +GlobalConfig.DIR_NAME+File.separator+GlobalConfig.TEMP_CAMERA_IMG;
+                    File file=new File(cemareImageFilePath);
+                    if(file.exists()){
+                        createUploadAlert(file);
+                        Log.e("执行了s", "执s行了");
+                    }else {
+                        return;
+                    }
+                    break;
+                case GlobalConfig.CHOOSE_PHOTO:
+                    Uri photoUri=data.getData();
+                    String imageFilePath=getRealPathFromUri(photoUri);
+                    if(imageFilePath==null){
+                        Log.e("文件路径为空","文件路径为空");
+                       return;
+                    }else {
+                        Log.e("执行了", "执行了");
+                        File imageFile=new File(imageFilePath);
+                        
+                        if(!imageFile.exists()){
+                            Log.e("文件不存在","文件不存在");
+                            return;
+                        }else {
+                            createUploadAlert(imageFile);
+                        }
+                    }
+                  
+//                    Log.e("frg图片的路径为",);
+                    break;
+            }
+        }
+    }
 }

@@ -3,6 +3,7 @@ package work.wanghao.youthidere.utils;
 import android.content.Context;
 import android.database.SQLException;
 import android.util.Log;
+import android.util.Pair;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
@@ -14,13 +15,16 @@ import com.squareup.okhttp.Response;
 import com.wangh.http.okhttp.OkHttpClientManager;
 import com.wangh.http.okhttp.request.OkHttpRequest;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.internal.UncheckedRow;
 import work.wanghao.youthidere.R;
+import work.wanghao.youthidere.config.GlobalConfig;
 import work.wanghao.youthidere.dao.TokenDaoImpl;
 import work.wanghao.youthidere.model.Category;
 import work.wanghao.youthidere.model.Explore;
@@ -30,6 +34,7 @@ import work.wanghao.youthidere.model.RecItemJsonData;
 import work.wanghao.youthidere.model.ReceCategoryJsonData;
 import work.wanghao.youthidere.model.ReceExploreJsonData;
 import work.wanghao.youthidere.model.ReceFavoriteJsonData;
+import work.wanghao.youthidere.model.ReceImageJsonData;
 import work.wanghao.youthidere.model.RecePostComment;
 import work.wanghao.youthidere.model.RecePostJsonData;
 import work.wanghao.youthidere.model.ReceVoteJsonData;
@@ -612,6 +617,62 @@ public class HttpUtils {
             flag = false;
         }
         return flag;
+        
+    }
+
+
+    /**
+     * 上传用户自定义图片到服务器
+     * 
+     * @param token
+     * @param text
+     * @param imageFile
+     * @return
+     */
+    public static boolean uploadImageToServer(String token,String text,File imageFile){
+        String url=null;
+        boolean flag=false;
+        if(token.isEmpty()){
+            url= "http://www.qingniantuzhai.com/api/images";
+        }else {
+            url= "http://www.qingniantuzhai.com/api/images?token="+token;
+        }
+        
+        try {
+        
+         ReceImageJsonData data=new OkHttpRequest.Builder()
+                    .url(url)
+                    .addParams("text",text)
+                    .addHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8")
+                    .addHeader("Connection", "Keep-Alive")
+                    .addHeader("Accept-Encoding", "gzip")
+                    .addHeader("User-Agent", GlobalConfig.BROWSER_UA)
+                    .files(new Pair<String, File>("photo", imageFile))//
+                    .upload(ReceImageJsonData.class);
+            
+            if(data==null||data.getImage()==null){
+                flag=false;
+            }else {
+                if(text.equals(data.getImage().getText())){
+                    flag=true;
+                }
+            }
+            
+            
+        }catch (IOException e){
+            Log.e("上传图片错误","错误详情为:"+e.toString());
+            flag=flag;
+        }catch (Exception e){
+            flag=false;
+        }
+        
+        return flag;
+        
+        
+        
+        
+        
+        
         
     }
 
