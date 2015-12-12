@@ -27,7 +27,6 @@ import work.wanghao.youthidere.fragment.CategoryFragment;
 import work.wanghao.youthidere.fragment.HomeFragment;
 import work.wanghao.youthidere.fragment.LoginFragment;
 import work.wanghao.youthidere.fragment.SignupFragment;
-import work.wanghao.youthidere.fragment.SubmitDataFragment;
 import work.wanghao.youthidere.model.Token;
 import work.wanghao.youthidere.utils.NetUtils;
 import work.wanghao.youthidere.utils.SQLiteUtils;
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity
          */
 
         mHomeFragment = HomeFragment.getInstance();
-        mSubmitDataFragment = SubmitDataFragment.getInstance();
+//        mSubmitDataFragment = SubmitDataFragment.getInstance();
         mAboutFragment = AboutFragment.getInstance();
         mCategoryFragment = CategoryFragment.getInstance();
         mLoginFragment=LoginFragment.getInstance();
@@ -169,12 +168,14 @@ public class MainActivity extends AppCompatActivity
             BEFORE_FRAGMENT_FLAG = R.id.nav_category;
 //            addFragmentList(mAboutFragment);
 
-        } else if (id == R.id.nav_submit_for_publication) {
-
-            switchFragment(mSubmitDataFragment, "SubmitDataFragment");
-            BEFORE_FRAGMENT_FLAG = R.id.nav_submit_for_publication;
-//            addFragmentList(mSubmitDataFragment);
-        } else if (id == R.id.nav_account) {
+        } 
+//        else if (id == R.id.nav_submit_for_publication) {
+//
+//            switchFragment(mSubmitDataFragment, "SubmitDataFragment");
+//            BEFORE_FRAGMENT_FLAG = R.id.nav_submit_for_publication;
+////            addFragmentList(mSubmitDataFragment);
+//        } 
+        else if (id == R.id.nav_account) {
 
             if (ACCOUNT_FLAG == R.layout.activity_login) {
                 switchFragment(LoginFragment.getInstance(), "LoginFragment");
@@ -210,9 +211,9 @@ public class MainActivity extends AppCompatActivity
                 case R.id.nav_category:
                     mFragmentMgr.beginTransaction().hide(mCategoryFragment).add(R.id.main_content, to, tag).commit();
                     break;
-                case R.id.nav_submit_for_publication:
-                    mFragmentMgr.beginTransaction().hide(mSubmitDataFragment).add(R.id.main_content, to, tag).commit();
-                    break;
+//                case R.id.nav_submit_for_publication:
+//                    mFragmentMgr.beginTransaction().hide(mSubmitDataFragment).add(R.id.main_content, to, tag).commit();
+//                    break;
                 case R.id.nav_account:
                     if(ACCOUNT_FLAG==R.layout.activity_login)
                     {
@@ -237,9 +238,9 @@ public class MainActivity extends AppCompatActivity
                 case R.id.nav_category:
                     mFragmentMgr.beginTransaction().hide(mCategoryFragment).show(to).commit();
                     break;
-                case R.id.nav_submit_for_publication:
-                    mFragmentMgr.beginTransaction().hide(mSubmitDataFragment).show(to).commit();
-                    break;
+//                case R.id.nav_submit_for_publication:
+//                    mFragmentMgr.beginTransaction().hide(mSubmitDataFragment).show(to).commit();
+//                    break;
                 case R.id.nav_account:
                     if(ACCOUNT_FLAG==R.layout.activity_login)
                     {

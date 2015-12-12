@@ -15,10 +15,10 @@
             android:id="@+id/nav_category"
             android:icon="@drawable/ic_category_36dp"
             android:title="@string/drawer_nav_item_category"/>
-        <item
-            android:id="@+id/nav_submit_for_publication"
-            android:icon="@drawable/ic_submit_for_artcle_36dp"
-            android:title="@string/drawer_nav_item_submit_for_publication"/>
+        <!--<item-->
+            <!--android:id="@+id/nav_submit_for_publication"-->
+            <!--android:icon="@drawable/ic_submit_for_artcle_36dp"-->
+            <!--android:title="@string/drawer_nav_item_submit_for_publication"/>-->
         <item
             android:id="@+id/nav_account"
             android:icon="@drawable/ic_accrount_36dp"

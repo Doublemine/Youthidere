@@ -3,110 +3,303 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-    >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingTop="56dp"
-    android:paddingLeft="24dp"
-    android:paddingRight="24dp"
+
+
     >
 
-    <ImageView android:src="@drawable/ic_info"
-               android:layout_width="wrap_content"
-               android:layout_height="72dp"
-               android:layout_marginBottom="24dp"
-               android:layout_gravity="center_horizontal" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/activity_account_info_image"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="1dp"
-        android:src="@drawable/xiamo"
-        app:civ_border_color="#4dd0e1"
-        app:civ_border_width="1dp"
-        android:layout_marginBottom="24dp"
-        />
-
-    <TextView
-        android:id="@+id/activity_account_info_username"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-     
-        android:shadowColor="#BDBDBD"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="1"
-        android:text="夏末"
-        android:layout_gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#ffff"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="24dp"
-        />
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="20dp"
+        >
 
-    <TextView
-        android:id="@+id/activity_account_info_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:shadowColor="#BDBDBD"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="1"
-        android:text="wanghaokoko1994@gmail.com"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#ffff"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        android:layout_marginBottom="24dp"
-        />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_info"/>
 
-    <TextView
-        android:id="@+id/activity_account_info_create_at"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:shadowColor="#BDBDBD"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:layout_gravity="center"
-        android:shadowRadius="1"
-        android:text="wanghaokoko1994@gmail.com"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#ffff"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        android:layout_marginBottom="24dp"
-        />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/activity_account_info_image"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/xiamo"
+                app:civ_border_color="#4dd0e1"
+                app:civ_border_width="1dp"
+                />
+
+            <RelativeLayout
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/activity_account_info_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="8dp"
+                    android:text="夏末"
+                    android:textColor="@color/primary_darker"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/activity_account_info_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/activity_account_info_username"
+                    android:text="wanghaokoko1994@gmail.com"
+                    android:textColor="@color/primary_darker"
+                    android:textSize="12sp"
+                    android:textStyle="italic"/>
+            </RelativeLayout>
 
 
-    
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:paddingRight="10dp"-->
+            <!--android:orientation="horizontal"-->
+            <!-->-->
+            <!-- -->
+            <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:clickable="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:drawableTop="@drawable/ic_local_library_white_36dp"-->
+            <!--android:text="阅读"-->
+            <!--android:background="@color/primary"-->
+            <!--android:layout_height="match_parent"/>-->
+            <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:clickable="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:drawableTop="@drawable/ic_local_library_white_36dp"-->
+            <!--android:text="收藏"-->
+            <!--android:background="@color/primary"-->
+            <!--android:layout_height="match_parent"/>-->
+            <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:clickable="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:drawableTop="@drawable/ic_local_library_white_36dp"-->
+            <!--android:text="点评"-->
+            <!--android:background="@color/primary"-->
+            <!--android:layout_height="match_parent"/>-->
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/activity_account_info_username"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowColor="#BDBDBD"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowDx="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowDy="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowRadius="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:gravity="center_horizontal"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="夏末"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="#ffff"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="20sp"&ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/activity_account_info_btn_logout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textColor="@color/accent"
-        android:layout_marginBottom="24dp"
-        android:padding="12dp"
-        android:text="@string/activity_account_info_logout"/>
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/activity_account_info_email"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_below="@id/activity_account_info_username"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowColor="#BDBDBD"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowDx="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowDy="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowRadius="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="wanghaokoko1994@gmail.com"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textAppearance="@style/TextAppearance.AppCompat.Body1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="#ffff"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="16sp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textStyle="italic"&ndash;&gt;-->
+            <!--&lt;!&ndash; &ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
 
-    <!--<TextView android:id="@+id/activity_login_link_signup"-->
-              <!--android:layout_width="fill_parent"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--android:layout_marginBottom="24dp"-->
-              <!--android:textColor="@color/iron"-->
-              <!--android:text="@string/actvity_login_xml_link_signup"-->
-              <!--android:gravity="center"-->
-              <!--android:textSize="16dip"/>-->
+            <!--</LinearLayout>-->
 
-</LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_caption"
+            android:layout_marginTop="5dp"
+            android:background="?attr/colorPrimaryDark"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/colorPrimaryDark"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView_communication_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginStart="35dp"
+                    android:src="@drawable/ic_local_library_white_24dp"
+                    />
+
+                <TextView
+                    android:id="@+id/textView_communication_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/imageView_communication_message"
+                    android:layout_toRightOf="@+id/imageView_communication_message"
+                    android:text="1024"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView_repeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_toEndOf="@+id/view2"
+                    android:layout_toRightOf="@+id/view2"
+                    android:src="@drawable/ic_star_white_24dp"/>
+
+                <TextView
+                    android:id="@+id/textView_repeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/imageView_repeat"
+                    android:layout_toRightOf="@+id/imageView_repeat"
+                    android:text="1024"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"/>
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="0.5dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView_thumb_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_toEndOf="@+id/view"
+                    android:layout_toRightOf="@+id/view"
+                    android:src="@drawable/ic_create_white_24dp"
+                    />
+
+                <TextView
+                    android:id="@+id/textView_thumb_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/imageView_thumb_up"
+                    android:layout_toRightOf="@+id/imageView_thumb_up"
+                    android:text="2048"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"/>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="0.5dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/activity_account_info_create_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="5dp"
+            android:shadowColor="#BDBDBD"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="wanghaokoko1994@gmail.com"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#ffff"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/activity_account_info_btn_logout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:padding="12dp"
+            android:text="@string/activity_account_info_logout"
+            android:textColor="@color/accent"/>
+
+        <!--<TextView android:id="@+id/activity_login_link_signup"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="24dp"-->
+        <!--android:textColor="@color/iron"-->
+        <!--android:text="@string/actvity_login_xml_link_signup"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="16dip"/>-->
+
+    </LinearLayout>
 </ScrollView>

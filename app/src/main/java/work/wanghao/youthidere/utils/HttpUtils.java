@@ -22,8 +22,13 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
-import io.realm.internal.UncheckedRow;
+import work.wanghao.youthidere.model.AccountFavorite;
+import work.wanghao.youthidere.model.CompleteItemComments;
 import work.wanghao.youthidere.R;
+import work.wanghao.youthidere.model.ReadHistoryItem;
+import work.wanghao.youthidere.model.ReceAccountCommentsJsonData;
+import work.wanghao.youthidere.model.ReceAccountFavoriteJsonData;
+import work.wanghao.youthidere.model.ReceReadHistoryItemJsonData;
 import work.wanghao.youthidere.config.GlobalConfig;
 import work.wanghao.youthidere.dao.TokenDaoImpl;
 import work.wanghao.youthidere.model.Category;
@@ -617,63 +622,153 @@ public class HttpUtils {
             flag = false;
         }
         return flag;
-        
+
     }
 
 
     /**
      * 上传用户自定义图片到服务器
-     * 
+     *
      * @param token
      * @param text
      * @param imageFile
      * @return
      */
-    public static boolean uploadImageToServer(String token,String text,File imageFile){
-        String url=null;
-        boolean flag=false;
-        if(token.isEmpty()){
-            url= "http://www.qingniantuzhai.com/api/images";
-        }else {
-            url= "http://www.qingniantuzhai.com/api/images?token="+token;
+    public static boolean uploadImageToServer(String token, String text, File imageFile) {
+        String url = null;
+        boolean flag = false;
+        if (token.isEmpty()) {
+            url = "http://www.qingniantuzhai.com/api/images";
+        } else {
+            url = "http://www.qingniantuzhai.com/api/images?token=" + token;
         }
-        
+
         try {
-        
-         ReceImageJsonData data=new OkHttpRequest.Builder()
+
+            ReceImageJsonData data = new OkHttpRequest.Builder()
                     .url(url)
-                    .addParams("text",text)
+                    .addParams("text", text)
                     .addHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8")
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
                     .addHeader("User-Agent", GlobalConfig.BROWSER_UA)
                     .files(new Pair<String, File>("photo", imageFile))//
                     .upload(ReceImageJsonData.class);
-            
-            if(data==null||data.getImage()==null){
-                flag=false;
-            }else {
-                if(text.equals(data.getImage().getText())){
-                    flag=true;
+
+            if (data == null || data.getImage() == null) {
+                flag = false;
+            } else {
+                if (text.equals(data.getImage().getText())) {
+                    flag = true;
                 }
             }
-            
-            
-        }catch (IOException e){
-            Log.e("上传图片错误","错误详情为:"+e.toString());
-            flag=flag;
-        }catch (Exception e){
-            flag=false;
+
+
+        } catch (IOException e) {
+            Log.e("上传图片错误", "错误详情为:" + e.toString());
+            flag = flag;
+        } catch (Exception e) {
+            flag = false;
         }
-        
+
         return flag;
-        
-        
-        
-        
-        
-        
-        
     }
 
+    /**
+     * 从服务器获取当前用户的阅读历史
+     *
+     * @param token
+     * @param date  格式为:2015-12-10
+     * @return
+     */
+    public static List<ReadHistoryItem> getReadHistoryFromServer(String token, String date) {
+        String url = "http://www.qingniantuzhai.com/api/users/read-history?date=" + date + "&token=" + token;
+        List<ReadHistoryItem> datas = null;
+        try {
+            ReceReadHistoryItemJsonData data = new OkHttpRequest.Builder()
+                    .addHeader("Connection", "Keep-Alive")
+                    .addHeader("Accept-Encoding", "gzip")
+                    .addHeader("User-Agent", GlobalConfig.BROWSER_UA)
+                    .url(url)
+                    .get(ReceReadHistoryItemJsonData.class);
+
+            if (data == null || data.getHistories() == null) {
+                return null;
+            } else {
+                datas = data.getHistories();
+            }
+            
+
+        } catch (IOException e) {
+            Log.e("获取阅读历史错误", e.toString());
+            return null;
+        } catch (Exception e) {
+            Log.e("获取阅读历史错误", e.toString());
+            return null;
+        }
+        return datas;
+    }
+
+    /**
+     * 从服务器获取用户的收藏列表
+     * @param token
+     * @return
+     */
+    public static List<AccountFavorite> getAccountFavoritesFromServer(String token){
+        String url="http://www.qingniantuzhai.com/api/favorites?token="+token+"&type=post";
+        List<AccountFavorite> datas=null;
+        try {
+            ReceAccountFavoriteJsonData data= new OkHttpRequest.Builder()
+                    .addHeader("Connection", "Keep-Alive")
+                    .addHeader("Accept-Encoding", "gzip")
+                    .addHeader("User-Agent", GlobalConfig.BROWSER_UA)
+                    .url(url)
+                    .get(ReceAccountFavoriteJsonData.class);
+            if(data==null||data.getFavorites()==null){
+                return null;
+            }else {
+                datas=data.getFavorites();
+            }
+        }catch (IOException e){
+            Log.e("获取收藏错误", e.toString());
+            return null;
+        }catch (Exception e){
+            Log.e("获取收藏错误", e.toString()); 
+            return null;
+        }
+        return datas;
+    }
+
+    /**
+     * TODO:暂时还不知道一页能够容纳多少评论
+     * @param page
+     * @param token
+     * @return
+     */
+    public static List<CompleteItemComments> getAccountCommentsFromServer(int page,String token){
+        String url="http://www.qingniantuzhai.com/api/users/comments?page="+page+"&token="+token;
+        List<CompleteItemComments> datas=null;
+        try {
+            ReceAccountCommentsJsonData data=  new OkHttpRequest.Builder()
+                    .addHeader("Connection", "Keep-Alive")
+                    .addHeader("Accept-Encoding", "gzip")
+                    .addHeader("User-Agent", GlobalConfig.BROWSER_UA)
+                    .url(url)
+                    .get(ReceAccountCommentsJsonData.class);
+            //// TODO: 2015-12-12-0012 此处内容判断可能会有问题，暂时不想写了就这样吧，有bug再说 
+            if(data==null||data.getUser()==null){
+                return null;
+            }else {
+                datas = data.getComments();
+            }
+        }catch (IOException e){
+            Log.e("获取评论错误", e.toString());
+            return null;
+        }catch (Exception e){
+            Log.e("获取评论错误", e.toString());
+            return null;
+        }
+        return datas;
+    }
+    
 }

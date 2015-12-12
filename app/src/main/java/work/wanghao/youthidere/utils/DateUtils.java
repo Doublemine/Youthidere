@@ -68,6 +68,14 @@ public class DateUtils {
         return strDate;
     }
 
-    
-   
+
+    /**
+     * 获取当前系统的时间
+     * 返回格式:xxxx-xx-xx
+     * @return
+     */
+    public static String getSystemDateByDay(){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        return simpleDateFormat.format(new Date());
+    }
 }

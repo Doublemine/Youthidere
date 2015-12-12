@@ -20,10 +20,10 @@
 
         <CheckBoxPreference
             android:layout="@layout/preference_item"
-            android:key="auto_load_image_on_mobile_network"
-            android:title="非WiFI下自动加载图片"
-            android:summaryOn="当前状态为开启\n为了保护您的流量，打开此选项后当程序检测到您在非WIFI情况下将会自动加载图片，此举会消耗您的数据流量。"
-            android:summaryOff="当前状态为关闭\n为了保护您的流量，关闭此选项后当程序检测到您在非WIFI情况下将不会自动加载图片，而是需要您手动点击加载。"
+            android:key="log_history"
+            android:title="记录浏览历史"
+            android:summaryOn="当前状态为开启\n打开此选项将会记录您每天浏览的图摘，在侧滑栏的账户选项中可以查看以往的浏览记录。"
+            android:summaryOff="当前状态为关闭\n打开此选项将会记录您每天浏览的图摘，在侧滑栏的账户选项中可以查看以往的浏览记录。"
             android:defaultValue="true"
             />
         
@@ -56,8 +56,8 @@
             android:key="checkUpdate"
             android:title="检查更新"
             android:summary="手动检查更新">
-            <!--<intent android:action="android.intent.action.VIEW"-->
-                    <!--android:data="https://notes.wanghao.work"/>-->
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="http://fir.im/ew6p"/>
         </Preference>
         <Preference
             android:layout="@layout/preference_item"
