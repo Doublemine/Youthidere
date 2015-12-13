@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="2dp"
+    android:clickable="true"
+    android:descendantFocusability="blocksDescendants"
+    android:elevation="5dp"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="horizontal"
+    app:cardCornerRadius="1dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/view_comment_imageView_avatar"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/xiamo"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/view_comment_textView_screen_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="#BDBDBD"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="时过夏末"
+                    android:textColor="@color/exploreUserNameFontColor"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/view_comment_textView_created_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:drawableLeft="@drawable/ic_create_date_18dp"
+                    android:paddingBottom="2dp"
+                    android:text="2015-5-7"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/view_comment_textView_user_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/view_comment_textView_created_at"
+                    android:drawableLeft="@drawable/ic_location_18dp"
+                    android:paddingBottom="2dp"
+                    android:text="中国 广东 深圳"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/view_comment_textView_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/view_comment_imageView_avatar"
+            android:layout_alignStart="@+id/view_comment_imageView_avatar"
+            android:layout_below="@+id/view_comment_imageView_avatar"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="这是个傻逼的视频"
+            android:textColor="@android:color/background_dark"/>
+
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:padding="5dp"-->
+        <!--android:layout_marginLeft="61dp"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/view_comment_textView_reply"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:drawableLeft="@drawable/ic_reply_black_18dp"-->
+        <!--android:drawablePadding="5dp"-->
+        <!--android:layout_marginTop="6dp"-->
+        <!--/>-->
+        <!--<TextView-->
+        <!--android:id="@+id/view_comment_textView_liked_count"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toRightOf="@id/view_comment_textView_reply"-->
+        <!--android:layout_marginRight="30dp"-->
+        <!--android:layout_marginTop="6dp"-->
+        <!--android:text="赞"-->
+        <!--android:drawableLeft="@drawable/ic_thumb_up_purple_500_18dp"-->
+        <!--android:drawablePadding="5dp"-->
+        <!--/>-->
+        <!-- -->
+        <!-- -->
+        <!--</RelativeLayout>-->
+
+
+        <LinearLayout
+            android:id="@+id/parent_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#e0e0e0"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/parent_view_comment_imageView_avatar"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:src="@drawable/xiamo"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="0dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/parent_view_comment_textView_screen_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:shadowColor="#BDBDBD"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="1"
+                        android:text="时过夏末"
+                        android:textColor="@color/exploreUserNameFontColor"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/parent_view_comment_textView_created_at"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:drawableLeft="@drawable/ic_create_date_18dp"
+                        android:paddingBottom="2dp"
+                        android:text="2015-5-7"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/parent_view_comment_textView_user_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/parent_view_comment_textView_created_at"
+                        android:drawableLeft="@drawable/ic_location_18dp"
+                        android:paddingBottom="2dp"
+                        android:text="中国 广东 深圳"
+                        android:textSize="12sp"/>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/parent_view_comment_textView_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/view_comment_imageView_avatar"
+                android:layout_alignStart="@+id/view_comment_imageView_avatar"
+                android:layout_below="@+id/view_comment_imageView_avatar"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="这是个傻逼的视频"
+                android:textColor="@android:color/background_dark"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <TextView
+                android:id="@+id/view_comment_textView_artcle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="原文是这样说的"
+                android:textSize="14sp"
+
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -13,7 +13,6 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -137,10 +136,10 @@ public class SignupFragment extends Fragment {
                     Snackbar.make(mRegisterFragment, "注册成功~", Snackbar.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                     if(AccountInfoFragment.getInstance().isAdded()){
-                        getActivity().getSupportFragmentManager().beginTransaction().remove(SignupFragment.getInstance()).show(AccountInfoFragment.getInstance()).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().remove(SignupFragment.getInstance()).show(AccountContainerFragment.getInstance()).commit();
                         mCallback.setMainActivityFlag(R.layout.activity_account_info);
                     }else {
-                        getActivity().getSupportFragmentManager().beginTransaction().remove(SignupFragment.getInstance()).add(R.id.main_content,AccountInfoFragment.getInstance()).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().remove(SignupFragment.getInstance()).add(R.id.main_content,AccountContainerFragment.getInstance()).commit();
                         mCallback.setMainActivityFlag(R.layout.activity_account_info);
                     }
                 }
@@ -156,11 +155,11 @@ public class SignupFragment extends Fragment {
 
             @Override
             protected Integer doInBackground(String... params) {
-               return HttpUtils.httpRegister(params[0],params[1],params[2],getActivity(),params[3]);
+               return HttpUtils.httpRegister(params[0],params[1],params[2],getActivity());
             }
         };
         
-        regsterTask.execute(name,email,password,new WebView(getActivity()).getSettings().getUserAgentString());
+        regsterTask.execute(name,email,password);
     }
 
 

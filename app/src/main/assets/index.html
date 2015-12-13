@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>%s</title>
+    <link href="file:///android_asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="file:///android_asset/css/app.css" rel="stylesheet">
+    <script src="file:///android_asset/js/jquery.min.js"></script>
+    <script src="file:///android_asset/js/bootstrap.min.js"></script>
+    <script src="file:///android_asset/js/jquery.lazyloadxt.min.js"></script>
+    <script type="text/javascript">
+        $.extend($.lazyLoadXT, {
+            edgeY: 500
+        });
+    </script>
+</head>
+<body style="padding: 10px;">
+<h3>${title_content}</h3>
+<small style="color: gray;">${content_create_at}</small>
+<div id="content" style="margin-top: 10px;">
+    ${content}
+</div>
+<hr/>
+<!--<p class="page-header">今天的内容让您开心了吗？快乐不要独享哦，分享一下给朋友们吧！点击右下角的分享图标，分享到对应的平台。</p>-->
+
+<!--<div class="page-header">热门评论</div>-->
+<!--<div class="comment-list" id="comment-list">-->
+    <!--%s-->
+<!--</div>-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("img.img-responsive").click(function () {
+            var src = $(this).attr('src');
+            window.xiamo.showImage(src)
+        });
+        $("#comment-list").click(function(){
+            window.android.showComment();
+        });
+    });
+</script>
+</body>
+</html>

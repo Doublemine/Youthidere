@@ -1,0 +1,54 @@
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="@color/cardViewBackground"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="5dp"
+    card_view:cardUseCompatPadding="true"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+    
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp">
+
+            <TextView
+                android:id="@+id/item_main_card_view_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingTop="3dp"
+                android:text="尼克从小有腿部缺陷，家人记录了他从小到大的片段，从开始的痛苦到在球场上飞奔，最后那一幕很震撼"
+                android:textColor="#424242"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                />
+            <TextView
+                android:id="@+id/item_main_card_view_create_time"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_main_card_view_title"
+                android:text="收藏于:2015-11-24"
+                android:singleLine="true"
+                android:textSize="14sp"/>
+          
+                
+                
+           
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

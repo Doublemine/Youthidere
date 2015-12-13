@@ -1,0 +1,38 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    font-family: "Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+    color: #339966;
+}
+body{
+    background: #fffffc;
+}
+
+img.img-responsive{
+    margin-bottom: 24px;
+    margin-top: 8px;
+}
+
+.share-icon{
+    text-align: center;
+}
+
+.share-icon > p {
+    font-size: 10px;
+    color: #cccccc;
+}
+
+.share-icon > a > img {
+    margin-bottom: 2px;
+}
+
+b{ text-decoration: line-through; font-weight:100;}
+
+.votes-count{
+    color: #ccc;
+}
+.comment-content{
+    color: #000;
+}
+.comment-time{
+    color: #ccc;
+    font-size: 12px;
+}

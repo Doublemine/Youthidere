@@ -13,7 +13,6 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -128,10 +127,10 @@ public class LoginFragment extends Fragment {
                     progressDialog.dismiss();
 
                     if (AccountInfoFragment.getInstance().isAdded()) {
-                        getActivity().getSupportFragmentManager().beginTransaction().remove(LoginFragment.getInstance()).show(AccountInfoFragment.getInstance()).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().remove(LoginFragment.getInstance()).show(AccountContainerFragment.getInstance()).commit();
                         mCallback.setMainActivityFlag(R.layout.activity_account_info);
                     } else {
-                        getActivity().getSupportFragmentManager().beginTransaction().remove(LoginFragment.getInstance()).add(R.id.main_content, AccountInfoFragment.getInstance()).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().remove(LoginFragment.getInstance()).add(R.id.main_content, AccountContainerFragment.getInstance()).commit();
                         mCallback.setMainActivityFlag(R.layout.activity_account_info);
                     }
 //                  
@@ -157,11 +156,11 @@ public class LoginFragment extends Fragment {
 
             @Override
             protected Integer doInBackground(String... params) {
-                return HttpUtils.httpLogin(params[0], params[1], getActivity(), params[2]);
+                return HttpUtils.httpLogin(params[0], params[1], getActivity());
 
             }
         };
-        loginTask.execute(email, password, new WebView(getActivity()).getSettings().getUserAgentString());
+        loginTask.execute(email, password);
     }
 
 
@@ -222,6 +221,7 @@ public class LoginFragment extends Fragment {
 
     public interface LoginCallback {
         void setMainActivityFlag(int flag);
+        void setTitle(String title);
     }
 }
 

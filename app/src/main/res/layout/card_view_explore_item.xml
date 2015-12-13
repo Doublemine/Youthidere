@@ -89,7 +89,6 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
-            android:src="@drawable/test_user_upload"
             android:scaleType="fitStart"
             android:layout_width="match_parent"
             android:adjustViewBounds="true"

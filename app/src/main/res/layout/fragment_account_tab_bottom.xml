@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/activity_account_info_image"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/xiamo"
+                app:civ_border_color="#4dd0e1"
+                app:civ_border_width="1dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/activity_account_info_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="8dp"
+                    android:text="夏末"
+                    android:textColor="@color/primary_darker"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/activity_account_info_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/activity_account_info_username"
+                    android:text="wanghaokoko1994@gmail.com"
+                    android:textColor="@color/primary_darker"
+                    android:textSize="12sp"
+                    android:textStyle="italic"/>
+            </RelativeLayout>
+
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:paddingRight="10dp"-->
+            <!--android:orientation="horizontal"-->
+            <!-->-->
+            <!-- -->
+            <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:clickable="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:drawableTop="@drawable/ic_local_library_white_36dp"-->
+            <!--android:text="阅读"-->
+            <!--android:background="@color/primary"-->
+            <!--android:layout_height="match_parent"/>-->
+            <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:clickable="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:drawableTop="@drawable/ic_local_library_white_36dp"-->
+            <!--android:text="收藏"-->
+            <!--android:background="@color/primary"-->
+            <!--android:layout_height="match_parent"/>-->
+            <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:clickable="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:drawableTop="@drawable/ic_local_library_white_36dp"-->
+            <!--android:text="点评"-->
+            <!--android:background="@color/primary"-->
+            <!--android:layout_height="match_parent"/>-->
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/activity_account_info_username"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowColor="#BDBDBD"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowDx="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowDy="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowRadius="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:gravity="center_horizontal"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="夏末"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="#ffff"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="20sp"&ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/activity_account_info_email"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_below="@id/activity_account_info_username"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowColor="#BDBDBD"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowDx="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowDy="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:shadowRadius="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="wanghaokoko1994@gmail.com"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textAppearance="@style/TextAppearance.AppCompat.Body1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="#ffff"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="16sp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textStyle="italic"&ndash;&gt;-->
+            <!--&lt;!&ndash; &ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
+
+            <!--</LinearLayout>-->
+
+
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/fragment_vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/fragment_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#5e35b1"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="#e91e63"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="#ffffff"
+                app:tabTextColor="#bdbdbd"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

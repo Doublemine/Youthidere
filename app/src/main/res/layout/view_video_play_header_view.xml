@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/video_header"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/relative_layout1"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:padding="5dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/view_video_imageView_avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/xiamo"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:id="@+id/view_video_textView_screen_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/view_video_imageView_avatar"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/view_video_imageView_avatar"
+            android:layout_toRightOf="@+id/view_video_imageView_avatar"
+            android:text="大煞笔"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/view_video_textView_created_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/view_video_imageView_avatar"
+            android:layout_alignLeft="@+id/view_video_textView_screen_name"
+            android:layout_alignStart="@+id/view_video_textView_screen_name"
+            android:layout_marginBottom="5dp"
+            android:text="12月4日 12:36"
+            android:textColor="@android:color/white"
+            android:textSize="10dp"/>
+
+        <!--<org.sunger.net.widget.TextImageView-->
+        <!--android:id="@+id/textView_plays_count"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignBottom="@+id/imageView_avatar"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginStart="20dp"-->
+        <!--android:layout_toEndOf="@+id/textView_created_at"-->
+        <!--android:layout_toRightOf="@+id/textView_created_at"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textSize="10dp" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/button_following"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginEnd="18dp"-->
+        <!--android:layout_marginRight="18dp"-->
+        <!--android:background="@drawable/corners_bg"-->
+        <!--android:paddingBottom="6dp"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:paddingRight="10dp"-->
+        <!--android:paddingTop="6dp"-->
+        <!--android:text="+关注"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textSize="10dp" />-->
+
+    </RelativeLayout>
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/videoControllerView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_below="@+id/relative_layout1"/>-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:layout_below="@+id/videoControllerView"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!-- -->
+        <!-->-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/view_video_video_summary"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text="在有较大量放射性物质向大气释放的突发事件后，撤离是早期和中期采取的防护措施之一。它是指人们从其住所、工作或休息的场所紧急地撤走一段有限时间，以避免或减少由事件引起的短期照射，主要是由烟羽或高水平沉积放射性物质产生的高剂量照射。大多数情况下，将允许撤离者反却自然的住所，一般为几天以内，只要这些住所可以居住又不须进行长时间的消除污染。由于时间较短和暂时居住，可以在类似学校或公共建筑物的一些场所类暂住；若撤离时间超过一周，则应安排到更好的一些居住设施内。实施撤离行动因时间紧迫，困难较多，风险较大，易造成混乱，因而决定采取撤离行动应持慎重态度。"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="12sp"-->
+           <!--/>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/view_video_video_summary"-->
+            <!--android:background="?attr/colorPrimaryDark"-->
+           <!-- -->
+            <!--android:orientation="horizontal">-->
+            <!-- -->
+            <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+               <!-- -->
+                <!--android:paddingBottom="5dp"-->
+                <!--android:paddingTop="5dp">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/imageView_communication_message"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="35dp"-->
+                    <!--android:layout_marginStart="35dp"-->
+                    <!--android:src="@drawable/ic_chat_white_18dp"/>-->
+
+                <!-- -->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/view_video_comment_time"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:layout_toEndOf="@+id/imageView_communication_message"-->
+                    <!--android:layout_toRightOf="@+id/imageView_communication_message"-->
+                    <!--android:text="2048"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="10sp"/>-->
+
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+               <!-- -->
+                <!--android:paddingBottom="5dp"-->
+                <!--android:paddingTop="5dp">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/imageView_repeat"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="35dp"-->
+                    <!--android:layout_marginStart="35dp"-->
+                    <!--android:layout_toEndOf="@+id/view2"-->
+                    <!--android:layout_toRightOf="@+id/view2"-->
+                    <!--android:src="@drawable/ic_visibility_white_18dp"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/view_video_view_time"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:layout_toEndOf="@+id/imageView_repeat"-->
+                    <!--android:layout_toRightOf="@+id/imageView_repeat"-->
+                    <!--android:text="1024"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="10sp"/>-->
+
+                <!--<View-->
+                    <!--android:id="@+id/view2"-->
+                    <!--android:layout_width="0.5dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"/>-->
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:paddingBottom="5dp"-->
+                <!--android:paddingTop="5dp">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/imageView_thumb_up"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="35dp"-->
+                    <!--android:layout_marginStart="35dp"-->
+                    <!--android:layout_toEndOf="@+id/view"-->
+                    <!--android:layout_toRightOf="@+id/view"-->
+                    <!--android:src="@drawable/ic_share_white_18dp"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/view_video_share_time"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:layout_toEndOf="@+id/imageView_thumb_up"-->
+                    <!--android:layout_toRightOf="@+id/imageView_thumb_up"-->
+                    <!--android:text="2048"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="10sp"/>-->
+
+                <!--<View-->
+                    <!--android:id="@+id/view"-->
+                    <!--android:layout_width="0.5dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"/>-->
+            <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
+
+    <!--</RelativeLayout>-->
+
+</LinearLayout>

@@ -8,15 +8,14 @@
         android:layout="@layout/preference_category_widget"
         android:title="系统设置">
 
-        <CheckBoxPreference
-            android:layout="@layout/preference_item"
-            android:title="列表自动加载更多"
-            android:key="list_auto_load_more"
-            android:summaryOn="当前状态为开启\n开启后，程序将会自动从服务器获取更多的数据以便于平滑浏览。"
-            android:summaryOff="当前状态为关闭\n开启后，程序将会自动从服务器获取更多的数据以便于平滑浏览。"
-
-            android:defaultValue="true"
-            />
+        <!--<CheckBoxPreference-->
+            <!--android:layout="@layout/preference_item"-->
+            <!--android:title="列表自动加载更多"-->
+            <!--android:key="list_auto_load_more"-->
+            <!--android:summaryOn="当前状态为开启\n开启后，程序将会自动从服务器获取更多的数据以便于平滑浏览。"-->
+            <!--android:summaryOff="当前状态为关闭\n开启后，程序将会自动从服务器获取更多的数据以便于平滑浏览。"-->
+            <!--android:defaultValue="true"-->
+            <!--/>-->
 
         <CheckBoxPreference
             android:layout="@layout/preference_item"
@@ -24,6 +23,22 @@
             android:title="记录浏览历史"
             android:summaryOn="当前状态为开启\n打开此选项将会记录您每天浏览的图摘，在侧滑栏的账户选项中可以查看以往的浏览记录。"
             android:summaryOff="当前状态为关闭\n打开此选项将会记录您每天浏览的图摘，在侧滑栏的账户选项中可以查看以往的浏览记录。"
+            android:defaultValue="true"
+            />
+        <CheckBoxPreference
+            android:layout="@layout/preference_item"
+            android:key="image_quality"
+            android:title="启用ARGB_8888"
+            android:summaryOn="当前启用ARGB_8888\n为了保证平滑浏览以及较低的内存开销和流量消耗，默认使用RGB_565格式为图片格式，如果您不在意流量以及内存占用想获取更高质量的图片，请打开此选项。"
+            android:summaryOff="当前启用RGB_565\n为了保证平滑浏览以及较低的内存开销和流量消耗，默认使用RGB_565格式为图片格式，如果您不在意流量以及内存占用想获取更高质量的图片，请打开此选项。"
+            android:defaultValue="false"
+            />
+        <SwitchPreference
+            android:layout="@layout/preference_item"
+            android:key="internal_or_external_cache"
+            android:title="使用内部缓存"
+            android:summaryOn="当前启用程序内部缓存\n为了保证兼容性，如果您不想使用手机的内置存储空间做缓存，请关闭此选项，程序将会使用SD卡作为缓存容器。"
+            android:summaryOff="当前启用程序SD缓存\n为了保证兼容性，如果您不想使用手机的内置存储空间做缓存，请关闭此选项，程序将会使用SD卡作为缓存容器。"
             android:defaultValue="true"
             />
         

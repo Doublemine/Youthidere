@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Youthidere</string>
+    <string name="app_name">青年图摘</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
@@ -57,24 +57,47 @@
 
     <!--以下为设置的参数值-->
     <string-array name="cache_name">
-        <item>30MiB</item>
         <item>50MiB</item>
-        <item>80MiB</item>
         <item>100MiB</item>
-        <item>120MiB</item>
+        <item>150MiB</item>
+        <item>200MiB</item>
+        <item>250MiB</item>
     </string-array>
     <string-array name="cache_value">
-        <item>30</item>
         <item>50</item>
-        <item>80</item>
         <item>100</item>
-        <item>120</item>
+        <item>150</item>
+        <item>200</item>
+        <item>250</item>
     </string-array>
     <string name="cache_default_value">50</string>
     <string name="activity_account_info_logout">LogOut</string>
-    <string name="nav_header_default_email_text">请登录账号享受更加完成的功能~</string>
-    <string name="nav_header_default_username_text">匿名用户</string>
-  
+    <string name="nav_header_default_email_text">未登录</string>
+    <string name="nav_header_default_username_text">未登录</string>
+
     <string name="browser_ua">Mozilla/5.0 (Linux U 10.0; Android 5.0;zh-CN; Doublemine Build/2015) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36</string>
     <string name="pref_clearCache_summary">清空程序占用的存储空间</string>
+    <string name="open_source_libraries_list">
+        com.android.support:design:23.1.1
+\n\nde.hdodenhof:circleimageview:2.0.0
+\n\ncom.android.support:cardview-v7:23.1.1
+\n\ncom.android.support:recyclerview-v7:23.1.1
+\n\ncom.github.bumptech.glide:glide:3.6.1
+\n\ncom.github.bumptech.glide:okhttp-integration:1.3.1
+\n\npl.droidsonroids.gif:android-gif-drawable:1.1.+
+\n\nio.realm:realm-android:0.86.0
+\n\ncom.squareup.okhttp:okhttp:2.6.0
+\n\ncom.google.code.gson:gson:2.5
+\n\ncom.google.android.exoplayer:exoplayer:r1.5.3
+    </string>
+    <string name="about_help_and_intr">
+       每天几篇图摘、几段小视频。希望能够给您一天的好心情。
+
+\n\n数据内容来源于青年图摘的官方网站http://www.qingniantuzhai.com，由于实在不能忍受官方原版的Android App于是有了这个。目前还有很多不完善需要改进的地方，如果你有什么好的意见或者建议，请访问http://notes.xiamo.tk/about给我留言反馈。
+
+\n\n由于本人并不会UI设计，制作这个App一半以上的时间都在纠结UI界面，所以如果你有关于界面方面的意见，请暂时不要吐槽，我实在是不想折腾界面了。
+
+
+
+    </string>
 </resources>

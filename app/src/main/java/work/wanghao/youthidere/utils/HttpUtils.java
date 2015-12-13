@@ -84,7 +84,7 @@ public class HttpUtils {
      * @param UA
      * @return
      */
-    public static int httpLogin(String email, String password, final Context context, String UA) {
+    public static int httpLogin(String email, String password, final Context context) {
         int result = -1;
         try {
             Log.e("执行了我", "----" + result + "-----");
@@ -95,7 +95,7 @@ public class HttpUtils {
                     .addHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8")
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader(" User-Agent", context.getResources().getString(R.string.browser_ua))
+                    .addHeader(" User-Agent", GlobalConfig.BROWSER_UA)
                     .post(Token.class);
 
             Log.e("登录token", response.toString());
@@ -141,7 +141,7 @@ public class HttpUtils {
      * @return
      */
 
-    public static int httpRegister(String username, String email, String password, final Context context, String UA) {
+    public static int httpRegister(String username, String email, String password, final Context context) {
         int result = -1;
         try {
             Token response = new OkHttpRequest.Builder()
@@ -152,7 +152,7 @@ public class HttpUtils {
                     .addHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8")
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader(" User-Agent", UA)
+                    .addHeader(" User-Agent", GlobalConfig.BROWSER_UA)
                     .post(Token.class);
 
             if (response.getError() != null) {//用户已经被注册
@@ -188,7 +188,7 @@ public class HttpUtils {
                     .url(url)
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader(" User-Agent", BROWSER_UA)
+                    .addHeader(" User-Agent", GlobalConfig.BROWSER_UA)
                     .get(RecItemJsonData.class);
             if (data == null || data.getPosts() == null) {
                 return null;
@@ -213,7 +213,7 @@ public class HttpUtils {
                     .url(url)
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader(" User-Agent", BROWSER_UA)
+                    .addHeader(" User-Agent", GlobalConfig.BROWSER_UA)
                     .get(RecItemJsonData.class);
             if (data == null || data.getPosts() == null) {
                 return null;
@@ -234,7 +234,7 @@ public class HttpUtils {
      * @param realm
      * @return
      */
-    public static List<PostItem> getUpdateOld__(int lastId, String UA, Realm realm) {
+    public static List<PostItem> getUpdateOld__(int lastId,  Realm realm) {
         String url = "http://www.qingniantuzhai.com/api/posts?count=20&max_id=" + lastId + "&";
         Gson gson = HttpUtils.getGsonInstance();
         Log.e("=-=-=-=-=-=", url);
@@ -244,7 +244,7 @@ public class HttpUtils {
             Request request = new Request.Builder()
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader(" User-Agent", UA)
+                    .addHeader(" User-Agent", GlobalConfig.BROWSER_UA)
                     .url(url)
                     .build();
             Response response = client.newCall(request).execute();
@@ -265,7 +265,7 @@ public class HttpUtils {
     }
 
     @Deprecated
-    public static List<PostItem> getUpdateNew__(int currentId, String UA) {
+    public static List<PostItem> getUpdateNew__(int currentId) {
 
         Gson gson = HttpUtils.getGsonInstance();
         String url = "http://www.qingniantuzhai.com/api/posts?since_id=" + currentId + "&count=20&";
@@ -276,7 +276,7 @@ public class HttpUtils {
             Request request = new Request.Builder()
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader(" User-Agent", UA)
+                    .addHeader(" User-Agent", GlobalConfig.BROWSER_UA)
                     .url(url)
                     .build();
             Response response = client.newCall(request).execute();
@@ -316,7 +316,7 @@ public class HttpUtils {
             ReceExploreJsonData receExploreJsonData = new OkHttpRequest.Builder()
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader(" User-Agent", BROWSER_UA)
+                    .addHeader(" User-Agent", GlobalConfig.BROWSER_UA)
                     .url(url)
                     .get(ReceExploreJsonData.class);
             if (receExploreJsonData == null || receExploreJsonData.getImages() == null) {
@@ -343,7 +343,7 @@ public class HttpUtils {
             ReceExploreJsonData receExploreJsonData = new OkHttpRequest.Builder()
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader(" User-Agent", BROWSER_UA)
+                    .addHeader(" User-Agent", GlobalConfig.BROWSER_UA)
                     .url(url)
                     .get(ReceExploreJsonData.class);
             if (receExploreJsonData == null || receExploreJsonData.getImages() == null) {
@@ -367,7 +367,7 @@ public class HttpUtils {
             ReceCategoryJsonData receExploreJsonData = new OkHttpRequest.Builder()
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader(" User-Agent", BROWSER_UA)
+                    .addHeader(" User-Agent", GlobalConfig.BROWSER_UA)
                     .url(CATEGORY_ADDR)
                     .get(ReceCategoryJsonData.class);
             if (receExploreJsonData == null || receExploreJsonData.getCategories() == null) {
@@ -394,7 +394,7 @@ public class HttpUtils {
             RecItemJsonData recItemJsonData = new OkHttpRequest.Builder()
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader(" User-Agent", BROWSER_UA)
+                    .addHeader(" User-Agent", GlobalConfig.BROWSER_UA)
                     .url(url)
                     .get(RecItemJsonData.class);
             if (recItemJsonData == null || recItemJsonData.getPosts() == null) {
@@ -421,7 +421,7 @@ public class HttpUtils {
             RecItemJsonData recItemJsonData = new OkHttpRequest.Builder()
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader("User-Agent", BROWSER_UA)
+                    .addHeader("User-Agent", GlobalConfig.BROWSER_UA)
                     .url(url)
                     .get(RecItemJsonData.class);
             if (recItemJsonData == null || recItemJsonData.getPosts() == null) {
@@ -437,25 +437,37 @@ public class HttpUtils {
     }
 
 
-    public static RecePostJsonData getSignglePostDataFromServer(int id) {
-        String url = "http://www.qingniantuzhai.com/api/posts/" + id + "?comments=100&";
+    /**
+     * 从服务器获取某一篇文章的内容
+     * @param id
+     * @return
+     */
+    public static RecePostJsonData getSignglePostDataFromServer(int id,String strtoken,boolean isVideoActivity) {
+        String url = null;
+        if (strtoken == null) {
+            url = "http://www.qingniantuzhai.com/api/posts/" + id + "?comments=100&";
+        } else {
+            url = "http://www.qingniantuzhai.com/api/posts/" + id + "?comments=100&" + "token=" + strtoken;
+        }
         RecePostJsonData data = null;
         try {
             RecePostJsonData recePostJsonData = new OkHttpRequest.Builder()
                     .addHeader("Connection", "Keep-Alive")
                     .addHeader("Accept-Encoding", "gzip")
-                    .addHeader("User-Agent", BROWSER_UA)
+                    .addHeader("User-Agent", GlobalConfig.BROWSER_UA)
                     .url(url)
                     .get(RecePostJsonData.class);
             if (recePostJsonData == null || recePostJsonData.getPost() == null) {
                 return null;
             }
             data = recePostJsonData;
-            if (data.getPost().getCategory_slug().equals("video")) {
-                Post temp = data.getPost();
-                temp.setContent(JsoupUtils.parseContent2VideoUrl(data.getPost().getContent()));
-                data.setPost(temp);
-                Log.e("video地址解析为:", ">" + data.getPost().getContent() + "<");
+            if (isVideoActivity) {
+                if (data.getPost().getCategory_slug().equals("video")) {
+                    Post temp = data.getPost();
+                    temp.setContent(JsoupUtils.parseContent2VideoUrl(data.getPost().getContent()));
+                    data.setPost(temp);
+                    Log.e("video地址解析为:", ">" + data.getPost().getContent() + "<");
+                }
             }
 
         } catch (IOException e) {

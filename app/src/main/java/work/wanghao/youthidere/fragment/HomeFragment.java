@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment {
         mViewPager.setAdapter(simpleFragmentPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+       
     }
 
 

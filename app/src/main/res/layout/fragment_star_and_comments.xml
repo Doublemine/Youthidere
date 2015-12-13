@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/frg_srfl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/frg_rv"
+            android:scrollbars="none"
+            android:clipToPadding="false"
+            android:padding="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        
+        
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/ic_list_white_24dp"
+        fab:menu_animationDelayPerItem="50"
+        fab:menu_colorNormal="#E91e63"
+        fab:menu_colorPressed="#ec407a"
+        fab:menu_colorRipple="#99FFFFFF"
+        fab:menu_fab_size="normal"
+        fab:menu_shadowColor="#66000000"
+        fab:menu_shadowRadius="4dp"
+        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowYOffset="3dp"
+        fab:menu_showShadow="true"
+        >
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_menu_return_top"
+            style="@style/MenuButtonsNormal_Comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/ic_vertical_align_top_white_24dp"
+            fab:fab_label="返回顶部"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_menu_logout"
+            style="@style/MenuButtonsNormal_Comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_exit_to_app_white_24dp"
+            fab:fab_label="注销"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
+    
+    
+    
+    
+    
+    
+    
+</FrameLayout>
