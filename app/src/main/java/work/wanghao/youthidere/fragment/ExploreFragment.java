@@ -17,14 +17,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -37,7 +34,6 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.Sort;
-import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import pl.droidsonroids.gif.GifImageView;
 import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.adapter.RecyclerExploreAdapter;
@@ -117,10 +113,10 @@ public class ExploreFragment extends Fragment implements Handler.Callback, Swipe
 //        mAdapter=new RecyclerExploreAdapter(getActivity());
         mRecyclerView.addOnScrollListener(mScrollListener);
 
-        SlideInBottomAnimationAdapter scaleInAnimationAdapter=new SlideInBottomAnimationAdapter(mAdapter);
-        scaleInAnimationAdapter.setFirstOnly(false);
+//        SlideInBottomAnimationAdapter scaleInAnimationAdapter=new SlideInBottomAnimationAdapter(mAdapter);
+//        scaleInAnimationAdapter.setFirstOnly(false);
 //        scaleInAnimationAdapter.setDuration(800);
-        mRecyclerView.setAdapter(scaleInAnimationAdapter);
+        mRecyclerView.setAdapter(mAdapter);
         initAdapterData();
         mFabPhotoLib.setOnClickListener(new View.OnClickListener() {
             @Override

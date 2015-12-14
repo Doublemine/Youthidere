@@ -170,7 +170,7 @@ public class AccountFavoriteFragment extends Fragment implements SwipeRefreshLay
                 mCallBack.setMainActivityFlag(R.layout.activity_login);
                 mCallBack.setHeaderUserEmail(getString(R.string.nav_header_default_email_text));
                 mCallBack.setHeaderUserName(getString(R.string.nav_header_default_username_text));
-                mCallBack.setHeaderUserDefaultImage(R.drawable.xiamo);
+                mCallBack.setHeaderUserDefaultImage(R.drawable.ic_account_circle_blue_grey_600_48dp);
 //                if(LoginFragment.getInstance().isAdded()){
 //                    getActivity().getSupportFragmentManager().beginTransaction().remove(AccountInfoFragment.getInstance()).show(LoginFragment.getInstance()).commit();
 //                }else {

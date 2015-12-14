@@ -37,7 +37,7 @@
                 android:layout_marginTop="1dp"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="0dp"
-                android:src="@drawable/xiamo"/>
+                android:src="@drawable/ic_account_circle_blue_grey_600_48dp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/view_comment_textView_screen_name"
-                    android:text="时过夏末"
+                    android:text="该账户被禁用"
                     android:textSize="16sp"
                     android:textColor="@color/exploreUserNameFontColor"
                     android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
                     android:paddingBottom="2dp"
                     android:layout_width="wrap_content"
                     android:drawableLeft="@drawable/ic_location_18dp"
-                    android:text="中国 广东 深圳"
+                    android:text="火星"
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
             

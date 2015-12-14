@@ -18,7 +18,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import work.wanghao.youthidere.R;
+import work.wanghao.youthidere.model.Token;
 import work.wanghao.youthidere.utils.HttpUtils;
+import work.wanghao.youthidere.utils.SQLiteUtils;
 
 /**
  * Created by wangh on 2015-11-28-0028.
@@ -123,7 +125,8 @@ public class LoginFragment extends Fragment {
                     progressDialog.dismiss();
                 } else if (aVoid == 0) {//登录成功
                     progressDialog.setMessage("登录成功!");
-                    Snackbar.make(mFragmentView, "登录成功!", Snackbar.LENGTH_SHORT).show();
+//                    Snackbar.make(mFragmentView, "登录成功!", Snackbar.LENGTH_SHORT).show();
+                    setAlreadyLoginHeader();
                     progressDialog.dismiss();
 
                     if (AccountInfoFragment.getInstance().isAdded()) {
@@ -222,6 +225,17 @@ public class LoginFragment extends Fragment {
     public interface LoginCallback {
         void setMainActivityFlag(int flag);
         void setTitle(String title);
+        void setHeaderUserName(String name);
+        void setHeaderUserEmail(String email);
+        void setHeaderUserImageByUrl(String url);
+        void setHeaderUserDefaultImage(int id);
+    }
+
+    private void setAlreadyLoginHeader(){
+        Token token= SQLiteUtils.getCurrentLoginUserToken(getActivity());
+        mCallback.setHeaderUserName(token.getUser().getName());
+        mCallback.setHeaderUserEmail(token.getUser().getEmail());
+        mCallback.setHeaderUserImageByUrl(token.getUser().getAvatar_url());
     }
 }
 

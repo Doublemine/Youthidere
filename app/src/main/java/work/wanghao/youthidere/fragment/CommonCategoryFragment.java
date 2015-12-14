@@ -21,7 +21,6 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.Sort;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.adapter.CommonItemAdapter;
 import work.wanghao.youthidere.db.PostItemRealmHelper;
@@ -81,10 +80,10 @@ public class CommonCategoryFragment extends Fragment implements SwipeRefreshLayo
         super.onActivityCreated(savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addOnScrollListener(mOnScrollListener);
-        ScaleInAnimationAdapter scaleInAnimationAdapter=new ScaleInAnimationAdapter(mAdapter);
-        scaleInAnimationAdapter.setFirstOnly(false);
+//        ScaleInAnimationAdapter scaleInAnimationAdapter=new ScaleInAnimationAdapter(mAdapter);
+//        scaleInAnimationAdapter.setFirstOnly(false);
 //        scaleInAnimationAdapter.setDuration(800);
-        recyclerView.setAdapter(scaleInAnimationAdapter);
+        recyclerView.setAdapter(mAdapter);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -20,9 +20,17 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.ResponseBody;
 
 import java.io.File;
+import java.io.IOException;
 
+import okio.Buffer;
+import okio.BufferedSource;
+import okio.ForwardingSource;
+import okio.Okio;
+import okio.Source;
 import pl.droidsonroids.gif.GifImageView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 import work.wanghao.youthidere.R;
@@ -61,11 +69,38 @@ public class PreViewImageActivity extends AppCompatActivity {
         mImage = (GifImageView) findViewById(R.id.activity_preview_image);
         mFabShare = (FloatingActionButton) findViewById(R.id.fab_menu_share);
         mFabMenu = (FloatingActionMenu) findViewById(R.id.fab_menu);
+        mAttacher = new PhotoViewAttacher(mImage);
         Intent intent = getIntent();
         src = intent.getStringExtra("img_url");
         mFileName = src.substring(src.lastIndexOf('/') + 1);
         Log.e("saveImageToSDCard", src);
-        Glide.with(this).load(src).placeholder(R.raw.loading).diskCacheStrategy(DiskCacheStrategy.SOURCE).priority(Priority.HIGH).into(mImage);
+        if(mFileName.endsWith(".gif")){
+            Glide.with(this).load(src).asGif().placeholder(R.drawable.ic_loading).diskCacheStrategy(DiskCacheStrategy.SOURCE).priority(Priority.HIGH).into(new SimpleTarget<GifDrawable>() {
+                @Override
+                public void onResourceReady(GifDrawable resource, GlideAnimation<? super GifDrawable> glideAnimation) {
+                    try {
+                        pl.droidsonroids.gif.GifDrawable gd=new pl.droidsonroids.gif.GifDrawable(resource.getData());
+                        mImage.setImageDrawable(gd);
+                        mAttacher.update();
+                    } catch (IOException e) {
+                        Log.e("旺达了","dsds");
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }else {
+            Glide.with(this).load(src).asBitmap().placeholder(R.drawable.ic_loading).diskCacheStrategy(DiskCacheStrategy.SOURCE).priority(Priority.HIGH).into(new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                  
+                         
+                        mImage.setImageBitmap(resource);
+                        mAttacher.update();
+                   
+                }
+            });
+        }
+        
         mFabSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +121,8 @@ public class PreViewImageActivity extends AppCompatActivity {
             }
         });
         mAttacher = new PhotoViewAttacher(mImage);
-        mAttacher.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        mAttacher.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        mAttacher.update();
     }
 
     @Override
@@ -106,6 +142,7 @@ public class PreViewImageActivity extends AppCompatActivity {
     }
 
     private void saveImageToSDCard() {
+        
         if (isSaving) {
             Toast.makeText(PreViewImageActivity.this, "客官不要急，正在保存呢~", Toast.LENGTH_SHORT).show();
             return;
@@ -128,6 +165,7 @@ public class PreViewImageActivity extends AppCompatActivity {
                 @Override
                 public void onResourceReady(GifDrawable resource, GlideAnimation<? super GifDrawable> glideAnimation) {
 
+                   
                     AsyncTask<GifDrawable, Void, Boolean> storeTask = new AsyncTask<GifDrawable, Void, Boolean>() {
                         @Override
                         protected void onPreExecute() {
@@ -203,6 +241,56 @@ public class PreViewImageActivity extends AppCompatActivity {
         }
 
 
+    }
+    
+    //// TODO: 2015-12-14-0014  
+    private static class ProgressResponseBody extends ResponseBody {
+
+        private final ResponseBody responseBody;
+        private final ProgressListener progressListener;
+        private BufferedSource bufferedSource;
+
+        public ProgressResponseBody(ResponseBody responseBody, ProgressListener progressListener) {
+            this.responseBody = responseBody;
+            this.progressListener = progressListener;
+        }
+
+        @Override
+        public MediaType contentType() {
+            return responseBody.contentType();
+        }
+
+        @Override
+        public long contentLength() throws IOException {
+            return responseBody.contentLength();
+        }
+
+        @Override
+        public BufferedSource source() throws IOException {
+            if (bufferedSource == null) {
+                bufferedSource = Okio.buffer(source(responseBody.source()));
+            }
+            return bufferedSource;
+        }
+
+        private Source source(Source source) {
+            return new ForwardingSource(source) {
+                long totalBytesRead = 0L;
+
+                @Override
+                public long read(Buffer sink, long byteCount) throws IOException {
+                    long bytesRead = super.read(sink, byteCount);
+                    // read() returns the number of bytes read, or -1 if this source is exhausted.
+                    totalBytesRead += bytesRead != -1 ? bytesRead : 0;
+                    progressListener.update(totalBytesRead, responseBody.contentLength(), bytesRead == -1);
+                    return bytesRead;
+                }
+            };
+        }
+    }
+
+    interface ProgressListener {
+        void update(long bytesRead, long contentLength, boolean done);
     }
 
 }

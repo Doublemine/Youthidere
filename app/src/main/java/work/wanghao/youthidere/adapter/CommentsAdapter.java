@@ -23,6 +23,7 @@ import work.wanghao.youthidere.activity.ImageDisplayActivity;
 import work.wanghao.youthidere.activity.VideoPlayActivity;
 import work.wanghao.youthidere.model.Comments;
 import work.wanghao.youthidere.model.Token;
+import work.wanghao.youthidere.model.User;
 import work.wanghao.youthidere.utils.HttpUtils;
 import work.wanghao.youthidere.utils.NetUtils;
 import work.wanghao.youthidere.utils.SQLiteUtils;
@@ -71,8 +72,12 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return;
         }
         Comments item = data.get(position);
-        Glide.with(context).load(item.getUser().getAvatar_url()).into(commonViewHolder.userAvatar);
-        commonViewHolder.userName.setText(item.getUser().getName());
+        User user=item.getUser();
+        if(user!=null){
+            Glide.with(context).load(user.getAvatar_url()).into(commonViewHolder.userAvatar);
+            commonViewHolder.userName.setText(user.getName());
+        }
+       
         commonViewHolder.userCommentContents.setText(item.getContent());
         commonViewHolder.userLikedTime.setText(item.getVotes_count());
         commonViewHolder.userCommentsTime.setText(item.getCreated_at());

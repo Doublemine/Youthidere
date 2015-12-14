@@ -77,7 +77,7 @@ public class AccountFavoriteAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onClick(View v) {
         int position = (Integer) v.getTag();
-        int posts = postItemData.get(position).getId();
+        int posts = postItemData.get(position).getPost().getId();
         Log.e("item被点击了", "id号为" + posts + "的item被点击了");
         Intent intent = null;
         intent = new Intent(context, ImageDisplayActivity.class);

@@ -226,7 +226,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="原文是这样说的"
-                android:textSize="14sp"
+                android:textSize="12sp"
+                android:padding="5dp"
+                android:background="@drawable/textview_border"
 
                 />
         </LinearLayout>

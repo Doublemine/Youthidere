@@ -18,7 +18,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import work.wanghao.youthidere.R;
+import work.wanghao.youthidere.model.Token;
 import work.wanghao.youthidere.utils.HttpUtils;
+import work.wanghao.youthidere.utils.SQLiteUtils;
 
 /**
  * Created by wangh on 2015-11-28-0028.
@@ -133,7 +135,8 @@ public class SignupFragment extends Fragment {
                     progressDialog.dismiss();
                 }
                 else if(integer==0){
-                    Snackbar.make(mRegisterFragment, "注册成功~", Snackbar.LENGTH_SHORT).show();
+//                    Snackbar.make(mRegisterFragment, "注册成功~", Snackbar.LENGTH_SHORT).show();
+                    setAlreadyLoginHeader();
                     progressDialog.dismiss();
                     if(AccountInfoFragment.getInstance().isAdded()){
                         getActivity().getSupportFragmentManager().beginTransaction().remove(SignupFragment.getInstance()).show(AccountContainerFragment.getInstance()).commit();
@@ -205,8 +208,18 @@ public class SignupFragment extends Fragment {
     }
 public interface SignUpCallBack{
     void setMainActivityFlag(int flag);
+    void setHeaderUserName(String name);
+    void setHeaderUserEmail(String email);
+    void setHeaderUserImageByUrl(String url);
+    void setHeaderUserDefaultImage(int id);
 }
-    
+
+    private void setAlreadyLoginHeader(){
+        Token token= SQLiteUtils.getCurrentLoginUserToken(getActivity());
+        mCallback.setHeaderUserName(token.getUser().getName());
+        mCallback.setHeaderUserEmail(token.getUser().getEmail());
+        mCallback.setHeaderUserImageByUrl(token.getUser().getAvatar_url());
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

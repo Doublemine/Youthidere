@@ -20,7 +20,6 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.Sort;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import work.wanghao.youthidere.R;
 import work.wanghao.youthidere.adapter.CommonItemAdapter;
 import work.wanghao.youthidere.db.PostItemRealmHelper;
@@ -105,10 +104,10 @@ public class BrowserImageFragment extends Fragment implements SwipeRefreshLayout
                 mRecyclerView.scrollToPosition(0);
             }
         });
-        ScaleInAnimationAdapter scaleInAnimationAdapter=new ScaleInAnimationAdapter(mCommonItemAdapter);
-        scaleInAnimationAdapter.setFirstOnly(false);
+//        ScaleInAnimationAdapter scaleInAnimationAdapter=new ScaleInAnimationAdapter(mCommonItemAdapter);
+//        scaleInAnimationAdapter.setFirstOnly(false);
 //        scaleInAnimationAdapter.setDuration(600);
-        mRecyclerView.setAdapter(scaleInAnimationAdapter);
+        mRecyclerView.setAdapter(mCommonItemAdapter);
         Log.e("mRealm", "realm对象已被创建");
         initAdapterData();
     }
